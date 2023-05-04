@@ -19,7 +19,14 @@ pd 08
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
-fristL -- TIMESTAMP
+briannaT -- 2023-05-03 21:57
 --------------------------------------------------------------
-<Thing fristL did.>
+* updated design doc
+    - most of the feedback focused on the smaller, logistical 
+    details of our project that weren't specifically stated
+    in our doc
+        - e.g. how we would retrieve restaurant reviews and
+        what exactly our stretch goals were
+    - we changed the design doc to explicitly address the questions
+    we received during the feedback round
 ==============================================================
