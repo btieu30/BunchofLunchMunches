@@ -44,3 +44,11 @@ briannaT -- 2023-05-04 22:00
   creating a working app, added database.py and parse.py files,
   and added csv file of the public data
 ==============================================================
+
+vivianT -- 2023-05-05 0:00 
+--------------------------------------------------------------
+* Formatted home page: includes dropdowns for results + a section for the map
+* Integrated jinja to make the number of results/dropdowns appear flexible; we can easily change the number
+* Rendered html template in flask app so we can test jinja/html code
+* Tried using JS with Jinja, still needs a long ways to go, but created function to disappear all other dropdown results (when user clicks on one)
+==============================================================
