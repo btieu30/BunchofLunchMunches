@@ -57,13 +57,15 @@
 
           <div id="results" class="col">
             <!-- list of results -->
-              {%for i in range(0, n)%}
+              {% set numList = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"] %}
+              {% set numList = numList[0:n] %}
+              {%for i in numList%}
                   <!-- dropdown -->
                   <div class="accordion" id="accordionPanelsStayOpenExample" id="accordion{{i}}">
-                    <div class="accordion-item" id="display-section-2">
+                    <div class="accordion-item" id="display-section-{{i}}">
 
                     <!-- preview of dropdown -->
-                      <button id="button{{i}}" class="accordion-button collapsed container" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                      <button id="button{{i}}" class="accordion-button collapsed container" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{i}}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{i}}">
                         
                         <div class="container">
                           <div class="row">
@@ -81,18 +83,18 @@
                       </button>
             
                     <!-- inside dropdown -->
-                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                    <div id="panelsStayOpen-collapse{{i}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading{{i}}">
                       <div class="accordion-body">
                         <div class="container center">
                           <!-- card: details ab restaurant -->
                           <div class="card" style="width: 18rem;">
                             <img class="card-img-top" src="..." alt="Card image cap">
                             <div class="card-body">
+                              <h5 class="card-title">{{name}}</h5>
+                              <p class="card-text"></p>
                               <h5 class="card-title">title</h5>
                               <p class="card-text">info</p>
-                              <h5 class="card-title">title</h5>
-                              <p class="card-text">info</p>
-                              <a href="#" class="btn btn-primary">Go somewhere</a>
+                              <a href="#" class="btn btn-primary">Saved restaurants</a>
                             </div>
                           </div>
 

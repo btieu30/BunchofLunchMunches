@@ -10,7 +10,8 @@
 //   alert(inputValue);
 // });
 
-var n = 3;
+const numList = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
+// numList = numList[0:3];
 var disappearAllElse = function(stay) {
     for (let i = 0; i < n; i++) {
         var accordion = document.getElementById("accordion"+i);
@@ -20,11 +21,11 @@ var disappearAllElse = function(stay) {
     }
 }
 
-// problem: js cant read jinja rn, so it can't get the button by id, which controlled using jinja
+// // problem: js cant read jinja rn, so it can't get the button by id, which controlled using jinja
 // for (let i = 0; i < n; i++) {
 //     var buttonID = "button"+i;
 //     var buttonDrop = document.getElementById(buttonID);
-    // buttonDrop.addEventListener("click", disappearAllElse(i));
+//     buttonDrop.addEventListener("click", disappearAllElse(i));
 // }
 
 
