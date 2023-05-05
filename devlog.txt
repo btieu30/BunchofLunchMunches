@@ -22,11 +22,25 @@ pd 08
 briannaT -- 2023-05-03 21:57
 --------------------------------------------------------------
 * updated design doc
-    - most of the feedback focused on the smaller, logistical 
+    - most of the feedback focused on the smaller, logistical
     details of our project that weren't specifically stated
     in our doc
         - e.g. how we would retrieve restaurant reviews and
         what exactly our stretch goals were
     - we changed the design doc to explicitly address the questions
     we received during the feedback round
+==============================================================
+
+briannaT -- 2023-05-04 22:00
+--------------------------------------------------------------
+* added content to requirements.txt to allow for Flask
+  installation and working Flask app
+* updated the README for launch codes and data linkage
+* (from class) frontend team - vivian + brianna worked on
+  creating html templates for the home and saved pages,
+  script.js file for dropdown menu interaction, and looked into
+  Bootstrap documentation
+* (from class) backend team - jeremy + anthony worked on
+  creating a working app, added database.py and parse.py files,
+  and added csv file of the public data
 ==============================================================
