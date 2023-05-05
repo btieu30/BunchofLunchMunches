@@ -4,6 +4,8 @@ class Database:
     def __init__(self):
         DB_FILE = "db"
 
+        
+
         self.db = sqlite3.connect(DB_FILE, check_same_thread=False)
         self.c = self.db.cursor()
 
@@ -27,12 +29,22 @@ class Database:
     def addRestaurant(self, id, name, borough, address, zipCode, desc, date, violation, score, grade):
         self.c.execute(
             f"INSERT INTO restaurants (id, name, borough, address, zipCode, description, inspectionDate, violation) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-            (id, name, borough, address, address, zipCode, desc, date, violation, score, grade)
+            (id, name, borough, address, zipCode, desc, date, violation, score, grade)
         )
+        self.commit()
         
     def commit(self) -> None:
         self.db.commit()
 
+    def getRestaurants(self, sortType="name", order = "ASC", *filters: list) -> list:
+        cond = "true" if len(filters)==0 else " AND ".join([f"{filter_[0]} = '{filter_[1]}'" for filter_ in filters])
+        self.c.execute(
+            f"SELECT * FROM restaurants WHERE {cond} ORDER BY {sortType} {order}"
+        )
+        return self.c.fetchall()
+
+
+        
 #     # three tables: users, orders in cart, order history
 #     c.execute(
 #         "CREATE TABLE IF NOT EXISTS restaurants(username TEXT PRIMARY KEY, password TEXT)")
