@@ -52,3 +52,9 @@ vivianT -- 2023-05-05 0:00
 * Rendered html template in flask app so we can test jinja/html code
 * Tried using JS with Jinja, still needs a long ways to go, but created function to disappear all other dropdown results (when user clicks on one)
 ==============================================================
+
+vivianT -- 2023-05-07 18:46
+--------------------------------------------------------------
+* Added buttons with star icons so that users can save the restaurants
+* Worked on implementing the JS that allows users to save
+==============================================================
