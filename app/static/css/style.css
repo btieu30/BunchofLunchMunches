@@ -15,7 +15,10 @@ h2 {
     padding: 2%;
 }
 
-
+#map {
+    height: 100%;
+  }
+  
 /* #button1 {
     background-color: red;
 } */
