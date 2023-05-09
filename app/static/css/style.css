@@ -4,7 +4,9 @@ SoftDev pd8
 P04 - */
 
 #top {
-    padding: 5%;
+    padding-top: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 h1 {
@@ -21,7 +23,7 @@ h2 {
   }
 
 #buttonSave {
-    width: 25%;
+    width: 100%;
 }
 
 #divSave, #divBack {

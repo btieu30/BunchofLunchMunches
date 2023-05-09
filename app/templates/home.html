@@ -53,7 +53,17 @@
               <button id="search-button" type="button" class="btn btn-primary">
                 <i class="fas fa-search"></i>
               </button>
-            </div> <br>
+            </div> 
+
+        </div>
+
+        <!-- saved rest button -->
+        <div class=row id="divSave">
+          <div class="d-flex justify-content-center">
+            <form action="/saved" method="POST">
+              <button id="buttonSave" type="submit" class="btn btn-secondary">Saved Restaurants</button>
+            </form>
+          </div>
         </div>
 
         <!-- separate row for results + map -->
@@ -69,7 +79,7 @@
                     <div class="accordion-item" id="display-section-{{i}}">
 
                     <!-- preview of dropdown -->
-                      <button id="button{{i}}" class="accordion-button collapsed container" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{i}}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{i}}">
+                      <button id="button{{i}}" onclick="disappearAllElse(i)" class="accordion-button collapsed container" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{i}}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{i}}">
                         
                         <div class="container">
                           <div class="row">
@@ -135,7 +145,19 @@
               function initialize() {
                 var map_parameters = { center: {lat: 40.731, lng: -73.935}, zoom: 10 };
                 var map = new google.maps.Map(document.getElementById('map'), map_parameters);
+                var pin = new google.maps.Marker ({
+                position:{lat: 40.731, lng: -73.935},
+                map: map,
+                title: "krusty krab",
+              });
+              var window = new google.maps.InfoWindow ({
+                content: '<h1> ur mom </h1>'
+              });
+              google.maps.event.addListener(pin, 'click', function() {
+                window.open(map, pin)
+              });
               }
+
               google.maps.event.addDomListener(window, 'load', initialize);
             </script>
 
@@ -145,11 +167,6 @@
         </div> 
         <!-- end of row for results + map -->
 
-        <div class=row id="divSave">
-          <form action="/saved" method="POST">
-            <button id="buttonSave" type="submit" class="btn btn-secondary">Saved Restaurants</button>
-          </form>
-        </div>
       </div>
       <!-- end of container -->
   </body>

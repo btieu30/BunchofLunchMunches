@@ -14,12 +14,28 @@ const numList = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight",
 // numList = numList[0:3];
 var disappearAllElse = function(stay) {
     for (let i = 0; i < numList.length; i++) {
-        var accordionID = "accordion"+numList[i];
+        var num = numList[i];
+
+        var accordionID = "accordion"+num;
+        console.log(accordionID);
+
         var accordion = document.getElementById(accordionID);
+        console.log(accordion);
+
         if (i != stay) {
             accordion.style.display="none";
         }
     }
+}
+
+var clickSave = function(star) {
+    if (star.style.display==="none") {
+        star.style.display = "inline";
+    }
+    else {
+        star.style.display = "none";
+    }
+    // ****** also need to add/remove restaurant from list of saved!!!
 }
 
 // problem: js cant read jinja rn, so it can't get the button by id, which controlled using jinja
@@ -31,21 +47,11 @@ for (let i = 0; i < numList.length; i++) {
     console.log(buttonID);
     var buttonDrop = document.getElementById(buttonID);
     console.log(buttonDrop);
-    buttonDrop.addEventListener("click", disappearAllElse(i));
+    // buttonDrop.addEventListener("onclick", disappearAllElse(i));
 
     // if user clicks save
     var saveID = "save"+num;
     var save = document.getElementById(saveID);
     var star = document.getElementById("star"+num);
-    save.addEventListener("click", clickSave(star))
-}
-
-var clickSave = function(star) {
-    if (star.style.display==="none") {
-        star.style.display = "inline";
-    }
-    else {
-        star.style.display = "none";
-    }
-    // ****** also need to add/remove restaurant from list of saved!!!
+    save.addEventListener("onclick", clickSave(star))
 }
