@@ -64,3 +64,10 @@ vivianT -- 2023-05-08 21:00
 * Added a route to saved page with a button/form on the home page
 * Populated saved page with essentially the same stuff/format as home page
 ==============================================================
+
+briannaT -- 2023-05-09 00:30
+--------------------------------------------------------------
+* added a visible map to the home page
+* signed up for goog api and retrieved the key, added key to keys folder
+* small touch-ups to README
+==============================================================

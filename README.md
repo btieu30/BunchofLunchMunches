@@ -1,4 +1,4 @@
-# <Project> by Bunch of Lunch Munches
+# Clean Restaurants by Bunch of Lunch Munches
 
 ## Roster:
 * Brianna Tieu (PM): Front-end (HTML, CSS, JS)
@@ -31,4 +31,4 @@ python app/app.py
 5) Go to locally hosted Flask page: http://127.0.0.1:5000/
 
 ### Data
-* New York City Restaurant Inspection Results (NYC Open Data)(https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j)
+* [New York City Restaurant Inspection Results (NYC Open Data)](https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j)
