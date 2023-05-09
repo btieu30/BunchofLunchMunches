@@ -58,3 +58,9 @@ vivianT -- 2023-05-07 18:46
 * Added buttons with star icons so that users can save the restaurants
 * Worked on implementing the JS that allows users to save
 ==============================================================
+
+vivianT -- 2023-05-08 21:00
+--------------------------------------------------------------
+* Added a route to saved page with a button/form on the home page
+* Populated saved page with essentially the same stuff/format as home page
+==============================================================

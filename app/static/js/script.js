@@ -50,18 +50,18 @@ var clickSave = function(star) {
     // ****** also need to add/remove restaurant from list of saved!!!
 }
 
-let map;
+// let map;
+//
+// async function initMap() {
+//   //@ts-ignore
+//   const { Map } = await google.maps.importLibrary("maps");
 
-async function initMap() {
-  //@ts-ignore
-  const { Map } = await google.maps.importLibrary("maps");
+//   map = new Map(document.getElementById("map"), {
+//     center: { lat: -34.397, lng: 150.644 },
+//     zoom: 8,
+//   });
+// }
 
-  map = new Map(document.getElementById("map"), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 8,
-  });
-}
-
-initMap();
+// initMap();
 
 

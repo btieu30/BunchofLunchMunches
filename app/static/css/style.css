@@ -18,6 +18,14 @@ h2 {
 #map {
     height: 100%;
   }
+
+#buttonSave {
+    width: 25%;
+}
+
+#divSave, #divBack {
+    padding: 2%;
+}
   
 /* #button1 {
     background-color: red;
