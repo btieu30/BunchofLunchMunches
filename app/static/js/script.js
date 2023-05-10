@@ -10,48 +10,91 @@
 //   alert(inputValue);
 // });
 
-const numList = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
-// numList = numList[0:3];
-var disappearAllElse = function(stay) {
+var numList = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
+numList = numList.splice(0,3);
+
+// problem: js cant read jinja rn, so it can't get the button by id, which controlled using jinja
+var initialize = function() {
     for (let i = 0; i < numList.length; i++) {
         var num = numList[i];
 
-        var accordionID = "accordion"+num;
-        console.log(accordionID);
+        // if user clicks on dropdown
+        var buttonID = "button"+num;
+        console.log(buttonID);
+        var buttonDrop = document.getElementById(buttonID);
+        console.log(buttonDrop);
 
-        var accordion = document.getElementById(accordionID);
-        console.log(accordion);
+        // if button is clicked for that one result, disappear every other results
+        buttonDrop.onclick = disappearAllElse;
 
-        if (i != stay) {
-            accordion.style.display="none";
-        }
+        // if user clicks save
+        // var saveID = "save"+num;
+        // var save = document.getElementById(saveID);
+        // var star = document.getElementById("star"+num);
+        // save.addEventListener("onclick", clickSave(star))
     }
+
+    // back to results button clicked:
+    var back = document.getElementById('buttonBackResults');
+    back.onclick = backToResults;
 }
 
-var clickSave = function(star) {
-    if (star.style.display==="none") {
-        star.style.display = "inline";
+var disappearAllElse = function(e) {
+    for (let i = 0; i < numList.length; i++) {
+        var num = numList[i];
+
+        //get id name
+        var buttonID = "button"+num;
+        console.log(buttonID);
+
+        //fetch dropdown by id
+        var buttonDrop = document.getElementById(buttonID);
+        console.log(buttonDrop);
+
+        //disappear every single result
+        buttonDrop.style.display= "none";
     }
-    else {
-        star.style.display = "none";
-    }
-    // ****** also need to add/remove restaurant from list of saved!!!
+
+    //display back to results button
+    var back = document.getElementById('buttonBackResults');
+    console.log(back);
+    back.style.display = "inline";
+
+    //only display the result that was clicked
+    e.style.display = "inline";
 }
 
-// problem: js cant read jinja rn, so it can't get the button by id, which controlled using jinja
-for (let i = 0; i < numList.length; i++) {
-    var num = numList[i];
+var backToResults = function(e) {
+    for (let i = 0; i < numList.length; i++) {
+        var num = numList[i];
 
-    // if user clicks on dropdown
-    var buttonID = "button"+num;
-    console.log(buttonID);
-    var buttonDrop = document.getElementById(buttonID);
-    console.log(buttonDrop);
-    // buttonDrop.addEventListener("onclick", disappearAllElse(i));
+        //get id name
+        var buttonID = "button"+num;
+        console.log(buttonID);
 
-    // if user clicks save
-    var saveID = "save"+num;
-    var save = document.getElementById(saveID);
-    var star = document.getElementById("star"+num);
-    save.addEventListener("onclick", clickSave(star))
+        //fetch dropdown by id
+        var buttonDrop = document.getElementById(buttonID);
+        console.log(buttonDrop);
+
+        //re-appear every single result
+        buttonDrop.style.display= "inline";
+
+        //made all the dropdowns collapsed NEEEED TO WORK ON!!!!!!!!!!!
+        buttonDrop.classList.remove("show");
+    }
+
+    //disappear button
+    e.style.display = "none";
 }
+
+// var clickSave = function(star) {
+//     if (star.style.display==="none") {
+//         star.style.display = "inline";
+//     }
+//     else {
+//         star.style.display = "none";
+//     }
+//     // ****** also need to add/remove restaurant from list of saved!!!
+// }
+
+initialize();

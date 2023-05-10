@@ -29,7 +29,12 @@ h2 {
 #divSave, #divBack {
     padding: 2%;
 }
-  
+
+#buttonBackResults {
+    display: none;
+    padding: 2%;
+}
+
 /* #button1 {
     background-color: red;
 } */

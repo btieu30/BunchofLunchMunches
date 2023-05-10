@@ -75,11 +75,11 @@
               {% set numList = numList[0:n] %}
               {%for i in numList%}
                   <!-- dropdown -->
-                  <div class="accordion" id="accordionPanelsStayOpenExample" id="accordion{{i}}">
-                    <div class="accordion-item" id="display-section-{{i}}">
+                  <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="accordion-item" id="display-section-{{i}}" id="accordion{{i}}">
 
                     <!-- preview of dropdown -->
-                      <button id="button{{i}}" onclick="disappearAllElse(i)" class="accordion-button collapsed container" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{i}}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{i}}">
+                      <button id="button{{i}}" class="accordion-button collapsed container" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{i}}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{i}}">
                         
                         <div class="container">
                           <div class="row">
@@ -133,7 +133,11 @@
                   </div>
         
               </div>
-              {%endfor%}
+              {%endfor%} <br>
+
+              <button type="button" class="btn btn-secondary" id="buttonBackResults">
+                Back To Results
+              </button>
           </div>
           <!-- end of 1st col (results) -->
 

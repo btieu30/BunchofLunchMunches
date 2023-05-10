@@ -71,3 +71,15 @@ briannaT -- 2023-05-09 00:30
 * signed up for goog api and retrieved the key, added key to keys folder
 * small touch-ups to README
 ==============================================================
+
+vivianT, briannaT -- 2023-05-09 14:05
+--------------------------------------------------------------
+* Added markers to goog map
+* Worked on saved restaurants button
+==============================================================
+
+vivianT -- 2023-05-09 23:50
+--------------------------------------------------------------
+* Finally made it so that clicking on one result shows card and gets rid of all the other resullts
+* Made a back to results button that'll re-appear all the results
+==============================================================
