@@ -11,7 +11,9 @@
 // });
 
 var numList = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
-numList = numList.splice(0,3);
+numList = numList.splice(0,3); //change 3 to n (number of results wanted)
+
+var expanded=true;
 
 // problem: js cant read jinja rn, so it can't get the button by id, which controlled using jinja
 var initialize = function() {
@@ -25,7 +27,7 @@ var initialize = function() {
         console.log(buttonDrop);
 
         // if button is clicked for that one result, disappear every other results
-        buttonDrop.onclick = disappearAllElse;
+        buttonDrop.onclick = toggle;
 
         // if user clicks save
         // var saveID = "save"+num;
@@ -35,8 +37,51 @@ var initialize = function() {
     }
 
     // back to results button clicked:
-    var back = document.getElementById('buttonBackResults');
-    back.onclick = backToResults;
+    // var back = document.getElementById('buttonBackResults');
+    // back.onclick = backToResults;
+}
+
+var toggle = function(e) {
+    
+    if (expanded) {
+        for (let i = 0; i < numList.length; i++) {
+            var num = numList[i];
+    
+            //get id name
+            var buttonID = "button"+num;
+            console.log(buttonID);
+    
+            //fetch dropdown by id
+            var buttonDrop = document.getElementById(buttonID);
+            console.log(buttonDrop);
+    
+            //disappear every single result
+            buttonDrop.style.display= "none";
+            
+        }
+        this.style.display = "inline";
+    }
+    else {
+        for (let i = 0; i < numList.length; i++) {
+            var num = numList[i];
+    
+            //get id name
+            var buttonID = "button"+num;
+            console.log(buttonID);
+    
+            //fetch dropdown by id
+            var buttonDrop = document.getElementById(buttonID);
+            console.log(buttonDrop);
+    
+            //re-appear every single result
+            buttonDrop.style.display= "inline";
+    
+            //made all the dropdowns collapsed NEEEED TO WORK ON!!!!!!!!!!!
+            buttonDrop.setAttribute("aria-expanded", "false");
+            // buttonDrop.classList.remove("show");
+        }
+    }
+    expanded = ! expanded
 }
 
 var disappearAllElse = function(e) {
@@ -57,11 +102,11 @@ var disappearAllElse = function(e) {
 
     //display back to results button
     var back = document.getElementById('buttonBackResults');
-    console.log(back);
+    // console.log(back);
     back.style.display = "inline";
 
     //only display the result that was clicked
-    e.style.display = "inline";
+    this.style.display = "inline";
 }
 
 var backToResults = function(e) {
@@ -80,7 +125,8 @@ var backToResults = function(e) {
         buttonDrop.style.display= "inline";
 
         //made all the dropdowns collapsed NEEEED TO WORK ON!!!!!!!!!!!
-        buttonDrop.classList.remove("show");
+        buttonDrop.setAttribute("aria-expanded", "false");
+        // buttonDrop.classList.remove("show");
     }
 
     //disappear button
