@@ -39,7 +39,7 @@ class Database:
 
     #One filter for now
     #Two ways to sort: ASC or DSC
-    def getRestaurants(self, sortType, order, *filters: list) -> list: #just make sortType = name by default and order = ASC on website
+    def getRestaurants(self, sortType="name", order="ASC", *filters: list) -> list: #just make sortType = name by default and order = ASC on website
         cond = "true" if len(filters)==0 else " AND ".join([f"{filter_[0]} = '{filter_[1]}'" for filter_ in filters])
         self.c.execute(
             f"SELECT * FROM restaurants WHERE {cond} ORDER BY {sortType} {order}"
