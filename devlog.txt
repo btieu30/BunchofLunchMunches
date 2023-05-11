@@ -5,7 +5,7 @@ Jeremy Kwok
 Vivian Teo
 pd 08
 ---------------------
-<Project Title/Description>
+Clean Restaurant Finder
 
 
  ______   ______   __   __   __       ______   _______
@@ -98,6 +98,14 @@ vivianT -- 2023-05-10 22:37
 * Got toggling save button to work: filled vs unfilled star depending on whether or not you want to save/unsave
 ==============================================================
 
+anthonyS -- 2023-05-11 13:00
+--------------------------------------------------------------
+* edited .gitignore for csv
+* added close method for database
+* edited parse
+==============================================================
+
+
 briannaT -- 2023-05-11 13:50
 --------------------------------------------------------------
 * added .gitignore
@@ -111,11 +119,10 @@ briannaT -- 2023-05-11 13:50
      to go if showing restaurant details through the API is too much $$
 ==============================================================
 
-anthonyS -- 2023-05-11 13:00
+anthonyS, jeremyK -- 2023-05-11 13:00
 --------------------------------------------------------------
-* edited .gitignore for csv
-* added close method for database
-* edited parse
+* finished parse algorithm
+
 
 vivianT -- 2023-05-11 13:50
 --------------------------------------------------------------
@@ -124,3 +131,4 @@ vivianT -- 2023-05-11 13:50
 * Made the search bar an actual form that can connect with the python files so input can be collected
 * Synchronized saved.html's js so that dropdowns/save works the same
 ==============================================================
+
