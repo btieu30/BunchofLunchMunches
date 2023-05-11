@@ -40,9 +40,12 @@ briannaT -- 2023-05-04 22:00
   creating html templates for the home and saved pages,
   script.js file for dropdown menu interaction, and looked into
   Bootstrap documentation
-* (from class) backend team - jeremy + anthony worked on
-  creating a working app, added database.py and parse.py files,
-  and added csv file of the public data
+==============================================================
+
+anthonyS, jeremyK -- 2023-05-04 13:00
+--------------------------------------------------------------
+* worked on creating a working app, added database.py and parse.py
+  files, added csv file of the public data
 ==============================================================
 
 vivianT -- 2023-05-05 0:00 
@@ -95,7 +98,7 @@ vivianT -- 2023-05-10 22:37
 * Got toggling save button to work: filled vs unfilled star depending on whether or not you want to save/unsave
 ==============================================================
 
-briannaT -- 2023-05-11 01:50
+briannaT -- 2023-05-11 13:50
 --------------------------------------------------------------
 * added .gitignore
 * looked more into the Goog Map API
@@ -107,3 +110,9 @@ briannaT -- 2023-05-11 01:50
     - however, entering the lat and long for each restaurant may be the way
      to go if showing restaurant details through the API is too much $$
 ==============================================================
+
+anthonyS -- 2023-05-11 13:00
+--------------------------------------------------------------
+* edited .gitignore for csv
+* added close method for database
+* edited parse
