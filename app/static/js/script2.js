@@ -1,5 +1,3 @@
-numList = numList.splice(0,4); // change 4 to number of results on saved page
-
 // Bunch of Lunch Munches
 // SoftDev pd8
 // ////2023
@@ -13,6 +11,7 @@ numList = numList.splice(0,4); // change 4 to number of results on saved page
 // });
 
 var numList = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
+numList = numList.splice(0,4); // change 4 to number of results on saved page
 
 var expanded=true;
 

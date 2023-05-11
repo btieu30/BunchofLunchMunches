@@ -46,6 +46,10 @@ var initialize = function() {
         console.log(unsave);
 
         unsave.onclick = clickUnsave;
+
+        // search button NEED TO DO
+        var searchButton = document.getElementById("search-button");
+        searchButton.onclick = ;
     }
 }
 
