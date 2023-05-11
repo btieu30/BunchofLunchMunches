@@ -95,3 +95,15 @@ vivianT -- 2023-05-10 22:37
 * Got toggling save button to work: filled vs unfilled star depending on whether or not you want to save/unsave
 ==============================================================
 
+briannaT -- 2023-05-11 01:50
+--------------------------------------------------------------
+* added .gitignore
+* looked more into the Goog Map API
+* discovered that we could make the API do the work to display restaurant 
+  details (reviews, names, status, etc.), but it costs $$$
+    - will look more into billing rates for more API features
+* figured out how to create a pin on the map based on a search query through the API, 
+  rather than entering the lat and long
+    - however, entering the lat and long for each restaurant may be the way
+     to go if showing restaurant details through the API is too much $$
+==============================================================
