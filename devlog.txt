@@ -83,3 +83,15 @@ vivianT -- 2023-05-09 23:50
 * Finally made it so that clicking on one result shows card and gets rid of all the other resullts
 * Made a back to results button that'll re-appear all the results
 ==============================================================
+
+vivianT, anthonyS -- 2023-05-10 14:05
+--------------------------------------------------------------
+* Fixed the toggling when pressing a result: now there's no button for going back to results, simply collapse the dropdown to go back, click on dropdown to see individual result
+==============================================================
+
+vivianT -- 2023-05-10 22:37
+--------------------------------------------------------------
+* Made separate JS file for save.html because it's just so much easier, same code, but what's diff is how many restaurants+which restaurants (will do this part later)
+* Got toggling save button to work: filled vs unfilled star depending on whether or not you want to save/unsave
+==============================================================
+
