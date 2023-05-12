@@ -48,7 +48,7 @@ anthonyS, jeremyK -- 2023-05-04 13:00
   files, added csv file of the public data
 ==============================================================
 
-vivianT -- 2023-05-05 0:00 
+vivianT -- 2023-05-05 0:00
 --------------------------------------------------------------
 * Formatted home page: includes dropdowns for results + a section for the map
 * Integrated jinja to make the number of results/dropdowns appear flexible; we can easily change the number
@@ -110,10 +110,10 @@ briannaT -- 2023-05-11 13:50
 --------------------------------------------------------------
 * added .gitignore
 * looked more into the Goog Map API
-* discovered that we could make the API do the work to display restaurant 
+* discovered that we could make the API do the work to display restaurant
   details (reviews, names, status, etc.), but it costs $$$
     - will look more into billing rates for more API features
-* figured out how to create a pin on the map based on a search query through the API, 
+* figured out how to create a pin on the map based on a search query through the API,
   rather than entering the lat and long
     - however, entering the lat and long for each restaurant may be the way
      to go if showing restaurant details through the API is too much $$
@@ -132,3 +132,8 @@ vivianT -- 2023-05-11 13:50
 * Synchronized saved.html's js so that dropdowns/save works the same
 ==============================================================
 
+briannaT -- 2023-05-12 00:52
+--------------------------------------------------------------
+* added domain to droplet to host p4
+  - project can be found at lunch.stinkycheese.rocks
+==============================================================
