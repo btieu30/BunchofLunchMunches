@@ -49,8 +49,13 @@ var initialize = function() {
 
         // search button NEED TO DO
         var searchButton = document.getElementById("search-button");
-        searchButton.onclick = ;
+        searchButton.onclick = displayResults;
     }
+}
+
+var displayResults = function(e) {
+    var results = document.getElementById("results");
+    results.style.display = "inline";
 }
 
 var toggle = function(e) {

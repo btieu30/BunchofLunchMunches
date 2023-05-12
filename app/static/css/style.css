@@ -30,6 +30,10 @@ h2 {
     padding: 2%;
 }
 
+#results {
+    display: none;
+}
+
 /* #button1 {
     background-color: red;
 } */
