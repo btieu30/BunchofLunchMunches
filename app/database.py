@@ -8,9 +8,9 @@ class Database:
         self.c = self.db.cursor()
 
     def createRestaurantTable(self):
-        self.c.execute(f"DROP TABLE IF EXISTS restaurant")
+        self.c.execute(f"DROP TABLE IF EXISTS restaurants")
         self.c.execute(
-            f"CREATE TABLE restaurant ( \
+            f"CREATE TABLE restaurants ( \
                 id TEXT PRIMARY KEY, \
                 name TEXT, \
                 borough TEXT, \
@@ -29,7 +29,7 @@ class Database:
 
     def addRestaurant(self, id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long):
         self.c.execute(
-            f"INSERT INTO restaurants (id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            f"INSERT INTO restaurants (id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             (id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long)
         )
         self.commit()
