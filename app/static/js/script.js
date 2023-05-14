@@ -11,20 +11,20 @@
 // });
 
 var numList = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
-numList = numList.splice(0,3); //change 3 to n (number of results wanted on home page)
-
 var expanded=true;
 
 // problem: js cant read jinja rn, so it can't get the button by id, which controlled using jinja
 var initialize = function() {
+    // search button NEED TO DO
+    var searchButton = document.getElementById("search-button");
+    searchButton.onclick = displayResults;
+        
     for (let i = 0; i < numList.length; i++) {
         var num = numList[i];
 
         // if user clicks on dropdown
         var buttonID = "button"+num;
-        console.log(buttonID);
         var buttonDrop = document.getElementById(buttonID);
-        console.log(buttonDrop);
 
         // if button is clicked for that one result, disappear every other results
         buttonDrop.onclick = toggle;
@@ -46,20 +46,25 @@ var initialize = function() {
         console.log(unsave);
 
         unsave.onclick = clickUnsave;
-
-        // search button NEED TO DO
-        var searchButton = document.getElementById("search-button");
-        searchButton.onclick = displayResults;
     }
 }
 
 var displayResults = function(e) {
+    // get results element (col)
     var results = document.getElementById("results");
+
+    // get the number of dropdowns there are so we know how to splice the numList array
+    var numOfDropdowns = results.getElementsByClassName("accordion").length;
+    console.log("num of dropdowns/results: "+numOfDropdowns);
+
+    // splice numList so all our other functions that use it are accurate (ex: when getting button ids: buttonOne, buttonTwo, ...)
+    numList = numList.splice(0,numOfDropdowns);
+
+    // display results
     results.style.display = "inline";
 }
 
 var toggle = function(e) {
-    
     if (expanded) {
         for (let i = 0; i < numList.length; i++) {
             var num = numList[i];

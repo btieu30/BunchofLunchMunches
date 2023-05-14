@@ -75,11 +75,6 @@ briannaT -- 2023-05-09 00:30
 * small touch-ups to README
 ==============================================================
 
-jeremyK -- 2023-05-11 13:00
---------------------------------------------------------------
-* began parsing algorithm and created SQLite Database
-==============================================================
-
 vivianT, briannaT -- 2023-05-09 14:05
 --------------------------------------------------------------
 * Added markers to goog map
@@ -103,13 +98,17 @@ vivianT -- 2023-05-10 22:37
 * Got toggling save button to work: filled vs unfilled star depending on whether or not you want to save/unsave
 ==============================================================
 
+jeremyK -- 2023-05-11 13:00
+--------------------------------------------------------------
+* began parsing algorithm and created SQLite Database
+==============================================================
+
 anthonyS -- 2023-05-11 13:00
 --------------------------------------------------------------
 * edited .gitignore for csv
 * added close method for database
 * edited parse
 ==============================================================
-
 
 briannaT -- 2023-05-11 13:50
 --------------------------------------------------------------
@@ -127,7 +126,7 @@ briannaT -- 2023-05-11 13:50
 anthonyS, jeremyK -- 2023-05-11 13:00
 --------------------------------------------------------------
 * finished parse algorithm
-
+==============================================================
 
 vivianT -- 2023-05-11 13:50
 --------------------------------------------------------------
@@ -141,4 +140,13 @@ briannaT -- 2023-05-12 00:52
 --------------------------------------------------------------
 * added domain to droplet to host p4
   - project can be found at lunch.stinkycheese.rocks
+==============================================================
+
+vivianT -- 2023-05-14 01:07
+--------------------------------------------------------------
+* Made it so that results only display after clicking the search button/hitting enter to prepare for the future when we actually need to search
+* Arrays I made in app.py as examples of how we want to return data to the html page
+* Returning arrays to html file and displaying the info in the cards so we're prepared for the future and we return real restaurants, just formatting right now
+* Instead of using an arbritary number n (number of results) in JS files, made it dynamic/accurate by counting amount of accordions we have bc now we actually have something being returned to html file via python file
+* NEXT TIME: same things for saved.html: return arrays to format, count dropdowns instead of arbritary n
 ==============================================================

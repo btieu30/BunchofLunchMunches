@@ -85,16 +85,16 @@
                         <div class="container">
                           <div class="row">
                               <h3>
-                                Restaurant name  
+                                {{restList[i][0]}}
                               </h3>
                           </div>
 
                           <div class="row">
-                            <h6>grade: </h6>
+                            <h6>grade: {{restList[i][1]}}</h6>
                           </div>
 
                           <div class="row">
-                            <h6>reviews: </h6>
+                            <h6>reviews: {{restList[i][2]}}</h6>
                           </div>
 
                           
@@ -112,14 +112,17 @@
                         <div class="container center">
                           <!-- card: details ab restaurant -->
                           <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="..." alt="Card image cap">
                             <div class="card-body">
                               
-                              <h5 class="card-title">name</h5>
-                              <p class="card-text"></p>
-                              <h5 class="card-title">title</h5>
-                              <p class="card-text">info</p>
-
+                              <h5 class="card-title">Info</h5>
+                              <p class="card-text">borough: {{restList[i][3]}}</p>
+                              <p class="card-text">building: {{restList[i][4]}}</p>
+                              <p class="card-text">street: {{restList[i][5]}}</p>
+                              <p class="card-text">zip code: {{restList[i][6]}}</p>
+                              <p class="card-text">cuisine description: {{restList[i][7]}}</p>
+                              <p class="card-text">inspection date: {{restList[i][8]}}</p>
+                              <p class="card-text">violation code: {{restList[i][9]}}</p>
+                            
                               <!-- save button -->
                               <a href="#" id="save{{numList[i]}}" class="btn btn-secondary">
                                 <svg id="star{{numList[i]}}" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
