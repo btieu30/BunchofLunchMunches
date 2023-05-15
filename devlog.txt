@@ -137,3 +137,13 @@ briannaT -- 2023-05-12 00:52
 * added domain to droplet to host p4
   - project can be found at lunch.stinkycheese.rocks
 ==============================================================
+
+anthonyS, jeremyK -- 2023-05-12 13:00
+--------------------------------------------------------------
+* debugged parse.py, loaded finalized db
+==============================================================
+
+anthonyS -- 2023-05-15 9:50
+--------------------------------------------------------------
+* validated length of csv row for potential source of bugs
+==============================================================

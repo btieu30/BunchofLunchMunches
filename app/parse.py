@@ -33,7 +33,7 @@ def parse():
         id = line[0]
         if (id not in restDict or restDict[line[0]][6] < makeDates(line[8])[0]) and line[1]!="" and line[8]!="" and makeDates(line[8])[0]>711858: #726467
             addToDict(restDict, line)
-
+    
     for id in restDict:
         r = restDict[id] # list, r=restaurants
         r = ["N/A" if x == "" else x for x in r]
@@ -41,3 +41,6 @@ def parse():
 
     csvFile.close()
     db.close()
+
+if __name__ == "__main__":
+    parse()
