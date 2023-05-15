@@ -115,7 +115,7 @@ var clickSave = function(e) {
     var unsave = document.getElementById(unsaveID);
     unsave.style.display = "inline";
 
-    // ****** also need to add restaurant from list of saved!!!
+    // ****** also need to add restaurant to list of saved!!!
 }
 
 var clickUnsave = function(e) {

@@ -160,3 +160,9 @@ anthonyS -- 2023-05-15 9:50
 --------------------------------------------------------------
 * validated length of csv row for potential source of bugs
 ==============================================================
+
+vivianT -- 2023-05-15 16:30
+--------------------------------------------------------------
+* Fixed the error where the page would reload upon clicking the search button by making the button typ "button" instead of "submit"
+* Updated saved.html and script2.js so that the dropdowns work like the way home.html does and has the same info formatting by taking in app.py's returned data
+==============================================================

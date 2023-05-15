@@ -11,12 +11,17 @@
 // });
 
 var numList = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
-numList = numList.splice(0,4); // change 4 to number of results on saved page
 
 var expanded=true;
 
 // problem: js cant read jinja rn, so it can't get the button by id, which controlled using jinja
 var initialize = function() {
+    var numOfDropdowns = results.getElementsByClassName("accordion").length;
+    console.log("num of dropdowns/results: "+numOfDropdowns);
+
+    // splice numList so all our other functions that use it are accurate (ex: when getting button ids: buttonOne, buttonTwo, ...)
+    numList = numList.splice(0,numOfDropdowns);
+
     for (let i = 0; i < numList.length; i++) {
         var num = numList[i];
 
@@ -100,7 +105,7 @@ var clickSave = function(e) {
     var unsave = document.getElementById(unsaveID);
     unsave.style.display = "inline";
 
-    // ****** also need to add restaurant from list of saved!!!
+    // ****** also need to add restaurant to list of saved!!!
 }
 
 var clickUnsave = function(e) {
