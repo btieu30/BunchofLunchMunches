@@ -15,10 +15,11 @@ var expanded=true;
 
 // problem: js cant read jinja rn, so it can't get the button by id, which controlled using jinja
 var initialize = function() {
-    // search button NEED TO DO
+    // search button
     var searchButton = document.getElementById("search-button");
+    console.log(searchButton);
     searchButton.onclick = displayResults;
-        
+    
     for (let i = 0; i < numList.length; i++) {
         var num = numList[i];
 
@@ -114,7 +115,7 @@ var clickSave = function(e) {
     var unsave = document.getElementById(unsaveID);
     unsave.style.display = "inline";
 
-    // ****** also need to add restaurant from list of saved!!!
+    // ****** also need to add restaurant to list of saved!!!
 }
 
 var clickUnsave = function(e) {

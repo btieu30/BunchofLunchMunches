@@ -11,12 +11,19 @@
 // });
 
 var numList = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
-numList = numList.splice(0,4); // change 4 to number of results on saved page
 
 var expanded=true;
 
+var map;
+
 // problem: js cant read jinja rn, so it can't get the button by id, which controlled using jinja
 var initialize = function() {
+    var numOfDropdowns = results.getElementsByClassName("accordion").length;
+    console.log("num of dropdowns/results: "+numOfDropdowns);
+
+    // splice numList so all our other functions that use it are accurate (ex: when getting button ids: buttonOne, buttonTwo, ...)
+    numList = numList.splice(0,numOfDropdowns);
+
     for (let i = 0; i < numList.length; i++) {
         var num = numList[i];
 
@@ -25,6 +32,8 @@ var initialize = function() {
         console.log(buttonID);
         var buttonDrop = document.getElementById(buttonID);
         console.log(buttonDrop);
+        //add another event for buttonDrop to create dynamic map pinning, based on what is clicked,
+        //map pins should be automatically updated with info abt restaurant upon click
 
         // if button is clicked for that one result, disappear every other results
         buttonDrop.onclick = toggle;
@@ -47,6 +56,10 @@ var initialize = function() {
 
         unsave.onclick = clickUnsave;
     }
+    var map_parameters = { center: {lat: 40.731, lng: -73.935}, zoom: 10 };
+    map = new google.maps.Map(document.getElementById('map'), map_parameters);
+
+    google.maps.event.addDomListener(window, 'load', initialize);
 }
 
 var toggle = function(e) {
@@ -65,7 +78,7 @@ var toggle = function(e) {
     
             //disappear every single result
             buttonDrop.style.display= "none";
-            
+            buttonDrop.addEventListener("click", addPin());
         }
         this.style.display = "inline";
     }
@@ -100,7 +113,7 @@ var clickSave = function(e) {
     var unsave = document.getElementById(unsaveID);
     unsave.style.display = "inline";
 
-    // ****** also need to add restaurant from list of saved!!!
+    // ****** also need to add restaurant to list of saved!!!
 }
 
 var clickUnsave = function(e) {
@@ -113,6 +126,27 @@ var clickUnsave = function(e) {
     save.style.display = "inline";
 
     // ****** also need to remove restaurant from list of saved!!!
+}
+
+function addPin() {
+    var name = document.getElementById("restTitle").innerHTML;
+    var grade = document.getElementById("restGrade").innerHTML;
+    var reviews = document.getElementById("restReviews").innerHTML;
+    var pin = new google.maps.Marker ({
+        //replace with selected restaurant's lat and long
+        position:{lat: 40.777, lng: -73.955},
+        map: map,
+        title: name,
+    });
+    var window = new google.maps.InfoWindow ({
+        content: grade, reviews
+      });
+    google.maps.event.addListener(pin, 'click', function() {
+        window.open(map, pin)
+      });
+      google.maps.event.addListener(map, 'click', function() {
+        window.close()
+      });
 }
 
 initialize();

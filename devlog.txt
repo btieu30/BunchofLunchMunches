@@ -160,3 +160,22 @@ anthonyS -- 2023-05-15 9:50
 --------------------------------------------------------------
 * validated length of csv row for potential source of bugs
 ==============================================================
+
+vivianT -- 2023-05-15 16:30
+--------------------------------------------------------------
+* Fixed the error where the page would reload upon clicking the search button by making the button typ "button" instead of "submit"
+* Updated saved.html and script2.js so that the dropdowns work like the way home.html does and has the same info formatting by taking in app.py's returned data
+==============================================================
+
+briannaT -- 2023-05-16 00:30
+--------------------------------------------------------------
+* migrated home.html page onto the droplet succesfully
+* looked into using apache as a potential way to host??
+* started plan for dynamic pins that clear and move depending on the restaurant from the dropdown selected
+==============================================================
+
+briannaT -- 2023-05-16 10:13
+--------------------------------------------------------------
+* added pin based on dropdown
+  - need to figure out how to clear map of all pins
+==============================================================
