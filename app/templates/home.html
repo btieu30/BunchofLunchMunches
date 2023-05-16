@@ -74,6 +74,9 @@
           <div id="results" class="col" style="display:none;">
             <!-- list of results -->
               {% set numList = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"] %}
+              {% if n > 10%}
+                {% n = 10 %}
+              {%endif%}
               {%for i in range(n)%}
                   <!-- dropdown -->
                   <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -113,9 +116,10 @@
                           <!-- card: details ab restaurant -->
                           <div class="card" style="width: 18rem;">
                             <div class="card-body">
+                              <!-- (id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long) -->
                               
                               <h5 class="card-title">Info</h5>
-                              <p class="card-text">borough: {{restList[i][3]}}</p>
+                              <p class="card-text">{{restList[i][3]}} + ", " + {{restList[i][2]}} + ", " + {{restList[i][3]}} + ", NY " + {{restList[i][4]}}</p>
                               <p class="card-text">building: {{restList[i][4]}}</p>
                               <p class="card-text">street: {{restList[i][5]}}</p>
                               <p class="card-text">zip code: {{restList[i][6]}}</p>

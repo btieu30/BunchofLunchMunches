@@ -9,6 +9,7 @@ def root():
     # restaurant name, grade, review | borough | building | street | zip code |  cuisine description | inspection date | violation code | 
     # (id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long)
     restaurants = db.getRestaurants()
+    print(restaurants)
     return render_template('home.html', restList=restaurants, n=len(restaurants))
 
 @app.route("/saved", methods=['GET', 'POST'])

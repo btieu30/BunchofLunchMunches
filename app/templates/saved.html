@@ -99,15 +99,15 @@
                         <!-- card: details ab restaurant -->
                         <div class="card" style="width: 18rem;">
                           <div class="card-body">
-                            
+                            <!-- give ids to all card elements to display onto map pin / window -->
                             <h5 class="card-title">Info</h5>
-                            <p class="card-text">borough: {{restList[i][3]}}</p>
-                            <p class="card-text">building: {{restList[i][4]}}</p>
-                            <p class="card-text">street: {{restList[i][5]}}</p>
-                            <p class="card-text">zip code: {{restList[i][6]}}</p>
-                            <p class="card-text">cuisine description: {{restList[i][7]}}</p>
-                            <p class="card-text">inspection date: {{restList[i][8]}}</p>
-                            <p class="card-text">violation code: {{restList[i][9]}}</p>
+                            <p id="restBorough" class="card-text">borough: {{restList[i][3]}}</p>
+                            <p id="restBuilding" class="card-text">building: {{restList[i][4]}}</p>
+                            <p id="restStreet" class="card-text">street: {{restList[i][5]}}</p>
+                            <p id="restZip" class="card-text">zip code: {{restList[i][6]}}</p>
+                            <p id="restCuisine" class="card-text">cuisine description: {{restList[i][7]}}</p>
+                            <p id="restInspection" class="card-text">inspection date: {{restList[i][8]}}</p>
+                            <p id="restViolation" class="card-text">violation code: {{restList[i][9]}}</p>
                           
                             <!-- save button -->
                             <a href="#" id="save{{numList[i]}}" class="btn btn-secondary">
@@ -138,37 +138,7 @@
           <!-- end of 1st col (results) -->
 
           <div class="col" id="map">
-            
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkEdk0O5zP5BDvlcbzusjbR6D0TRCbL8I&sensor=true&callback=initialize"></script>
-
-                <!-- 
-                  {% set numList = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"] %}
-            {%for i in range(n)%}
-                var map;
-                var request;
-                var service;
-                function initialize() {
-                  var map_parameters = { center: {lat: 40.731, lng: -73.935}, zoom: 10 };
-                  map = new google.maps.Map(document.getElementById('map'), map_parameters);
-                  var pin = new google.maps.Marker ({
-                    //replace with selected restaurant's lat and long
-                    position:{lat: 40.777, lng: -73.955},
-                    map: map,
-                    title: "<h3>{{restList[i][0]}}</h3>",
-                  });
-                  var window = new google.maps.InfoWindow ({
-                    content: '<h3>{{restList[i][0]}}</h3>'
-                  });
-                  google.maps.event.addListener(pin, 'click', function() {
-                    window.open(map, pin)
-                  });
-                  google.maps.event.addListener(map, 'click', function() {
-                    window.close()
-                  });
-                }
-
-              google.maps.event.addDomListener(window, 'load', initialize);
-              {%endfor%} -->
           </div>
           <!-- end of 2nd col (map)-->
 
