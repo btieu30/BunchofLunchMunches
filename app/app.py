@@ -10,7 +10,10 @@ def root():
     # (id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long)
     restaurants = db.getRestaurants()
     print(restaurants)
-    return render_template('home.html', restList=restaurants, n=len(restaurants))
+    n=len(restaurants)
+    if (n>10):
+        n = 10
+    return render_template('home.html', restList=restaurants, n = n)
 
 @app.route("/saved", methods=['GET', 'POST'])
 def saved_page():
