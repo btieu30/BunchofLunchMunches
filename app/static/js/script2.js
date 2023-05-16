@@ -14,6 +14,8 @@ var numList = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "
 
 var expanded=true;
 
+var map;
+
 // problem: js cant read jinja rn, so it can't get the button by id, which controlled using jinja
 var initialize = function() {
     var numOfDropdowns = results.getElementsByClassName("accordion").length;
@@ -30,6 +32,8 @@ var initialize = function() {
         console.log(buttonID);
         var buttonDrop = document.getElementById(buttonID);
         console.log(buttonDrop);
+        //add another event for buttonDrop to create dynamic map pinning, based on what is clicked,
+        //map pins should be automatically updated with info abt restaurant upon click
 
         // if button is clicked for that one result, disappear every other results
         buttonDrop.onclick = toggle;
@@ -52,6 +56,10 @@ var initialize = function() {
 
         unsave.onclick = clickUnsave;
     }
+    var map_parameters = { center: {lat: 40.731, lng: -73.935}, zoom: 10 };
+    map = new google.maps.Map(document.getElementById('map'), map_parameters);
+
+    google.maps.event.addDomListener(window, 'load', initialize);
 }
 
 var toggle = function(e) {
