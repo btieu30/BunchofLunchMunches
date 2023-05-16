@@ -37,9 +37,9 @@ class Database:
     def commit(self) -> None:
         self.db.commit()
 
-    #One filter for now
+    #One sorttype for now
     #Two ways to sort: ASC or DSC
-    def getRestaurants(self, sortType="name", order="ASC", *filters: list) -> list: #just make sortType = name by default and order = ASC on website
+    def getRestaurants(self, sortType="name", order="ASC", filters = []) -> list: #just make sortType = name by default and order = ASC on website
         cond = "true" if len(filters)==0 else " AND ".join([f"{filter_[0]} = '{filter_[1]}'" for filter_ in filters])
         self.c.execute(
             f"SELECT * FROM restaurants WHERE {cond} ORDER BY {sortType} {order}"
@@ -48,3 +48,7 @@ class Database:
 
     def close(self) -> None:
         self.db.close()
+
+if __name__=="__main__":
+    db = Database()
+    print(db.getRestaurants("name","ASC",(("desc", "Pizza"), ("borough", "Queens"))))
