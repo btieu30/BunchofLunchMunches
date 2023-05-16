@@ -78,7 +78,7 @@ var toggle = function(e) {
     
             //disappear every single result
             buttonDrop.style.display= "none";
-            
+            buttonDrop.addEventListener("click", addPin());
         }
         this.style.display = "inline";
     }
@@ -126,6 +126,27 @@ var clickUnsave = function(e) {
     save.style.display = "inline";
 
     // ****** also need to remove restaurant from list of saved!!!
+}
+
+function addPin() {
+    var name = document.getElementById("restTitle").innerHTML;
+    var grade = document.getElementById("restGrade").innerHTML;
+    var reviews = document.getElementById("restReviews").innerHTML;
+    var pin = new google.maps.Marker ({
+        //replace with selected restaurant's lat and long
+        position:{lat: 40.777, lng: -73.955},
+        map: map,
+        title: name,
+    });
+    var window = new google.maps.InfoWindow ({
+        content: grade, reviews
+      });
+    google.maps.event.addListener(pin, 'click', function() {
+        window.open(map, pin)
+      });
+      google.maps.event.addListener(map, 'click', function() {
+        window.close()
+      });
 }
 
 initialize();
