@@ -75,7 +75,7 @@
             <!-- list of results -->
               {% set numList = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"] %}
               {% if n > 10%}
-                {% n = 10 %}
+                {{ n = 10 }}
               {%endif%}
               {%for i in range(n)%}
                   <!-- dropdown -->
