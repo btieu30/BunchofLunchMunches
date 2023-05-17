@@ -179,3 +179,9 @@ briannaT -- 2023-05-16 10:13
 * added pin based on dropdown
   - need to figure out how to clear map of all pins
 ==============================================================
+
+vivianT -- 2023-05-16 20:53
+--------------------------------------------------------------
+* Updated the formatting of the info card of each restaurant so that it corresponds with the real database, made address format all nice
+* Made a dropdown for the search bar so users can filter and choose specifically within a category what they want to search (ex: grade, rating, borough)
+==============================================================

@@ -19,7 +19,16 @@ var initialize = function() {
     var searchButton = document.getElementById("search-button");
     console.log(searchButton);
     searchButton.onclick = displayResults;
-    
+
+    // clicking on filtering dropdowns
+    var borough = document.getElementById("borough");
+    borough.onclick = filter;
+    var grade = document.getElementById("grade");
+    grade.onclick = filter;
+    var rating = document.getElementById("rating");
+    rating.onclick = filter;
+
+    // go through results dropdowns to see if user clicks on them
     for (let i = 0; i < numList.length; i++) {
         var num = numList[i];
 
@@ -50,6 +59,15 @@ var initialize = function() {
     }
 }
 
+var filter = function(e) {
+    var mainButton = document.getElementById("filter");
+    mainButton.innerHTML = this.innerHTML;
+
+    var insideSearchBar = document.getElementById("search-input");
+    insideSearchBar.placeholder = this.innerHTML;
+}
+
+// clicking search button
 var displayResults = function(e) {
     // get results element (col)
     var results = document.getElementById("results");
@@ -60,6 +78,10 @@ var displayResults = function(e) {
 
     // splice numList so all our other functions that use it are accurate (ex: when getting button ids: buttonOne, buttonTwo, ...)
     numList = numList.splice(0,numOfDropdowns);
+
+    // make main dropdown say "Filter" again
+    var mainButton = document.getElementById("filter");
+    mainButton.innerHTML = "Filter";
 
     // display results
     results.style.display = "inline";
