@@ -6,6 +6,9 @@
 * Jeremy Kwok: Back-end (Database, Flask integration, parsing)
 * Vivian Teo: Front-end (HTML, CSS, JS)
 
+### Description
+Our app, Clean Restaurants, allows users to find the best restaurants to eat at in New York City. Users can search for specific restaurants and can access each of the results, which display the restaurant's details such as address, name, grade, reviews, and past health code violations. Users can also saved their favorites restaurants and access them again via the saved page. 
+
 ### Launch Codes
 1) Clone BunchofLunchMunches
 ```

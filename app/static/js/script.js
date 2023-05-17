@@ -107,7 +107,7 @@ var toggle = function(e) {
     
             //disappear every single result
             buttonDrop.style.display= "none";
-            buttonDrop.onclick = addPin;
+            //buttonDrop.onclick = addPin;
             //buttonDrop.addEventListener("click", addPin());
         }
         this.style.display = "inline";
