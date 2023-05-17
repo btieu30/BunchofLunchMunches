@@ -185,3 +185,11 @@ vivianT -- 2023-05-16 20:53
 * Updated the formatting of the info card of each restaurant so that it corresponds with the real database, made address format all nice
 * Made a dropdown for the search bar so users can filter and choose specifically within a category what they want to search (ex: grade, rating, borough)
 ==============================================================
+
+briannaT -- 2023-05-17 2:51
+--------------------------------------------------------------
+* edited README.md to reflect steps with CSV download
+* added to app.py to add functionality to adding pins for the locations
+* added map to home.html
+  - looked into how to get python data into js file, json??
+==============================================================
