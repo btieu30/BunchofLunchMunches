@@ -30,6 +30,11 @@ h2 {
     padding: 2%;
 }
 
+.dropdown-menu {
+    width: 750%;
+    height: 500%;
+}
+
 /* #button1 {
     background-color: red;
 } */

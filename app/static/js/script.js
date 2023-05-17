@@ -73,6 +73,12 @@ var filter = function(e) {
     insideSearchBar.placeholder = this.innerHTML;
 }
 
+var populate = function() {
+    var mainDropdown = document.getElementById("filter-dropdown");
+    for (let i=0; i<5; i++) {
+        var newRow = document.createElement("row");
+    }
+}
 // clicking search button
 var displayResults = function(e) {
     // get results element (col)

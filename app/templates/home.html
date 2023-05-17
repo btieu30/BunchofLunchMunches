@@ -43,27 +43,59 @@
 
   <body>
     <div class="container">
-
+      <!-- nav bar (looking for a nice one) -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Clean Restaurants</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Saved</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
       <!-- separate row for title+search bar -->
         <div id="top" class="row">
             <h1>Clean Restaurants</h1>
             <!-- search bar -->
             <!-- action="/search" method="POST"  -->
             <form class="input-group rounded"> 
-              <input id="search-input" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-
               <!-- dropdowns (filtering) -->
               <div class="dropdown">
                 <button id="filter" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Filter
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <button id="borough" class="dropdown-item" type="button">Borough</button>
-                  <button id="grade" class="dropdown-item" type="button">Grade</button>
-                  <button id="rating" class="dropdown-item" type="button">Rating</button>
+                  <div class = "container dropdown-item" id="filter-dropdown">
+                    <!-- title row -->
+                    <div class="row">
+                      <div id="borough" class="col">Borough</div>
+                      <div id="grade" class="col">Grade</div>
+                      <div id="rating" class="col">Rating</div>
+                      <div id="cuisine" class="col">Cuisine</div>
+                    </div>                  
+
+                  </div>
                 </div>
               </div>
 
+              <input id="search-input" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />        
               <button id="search-button" type="button" class="btn btn-primary">
                 <!-- microscope icon -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
