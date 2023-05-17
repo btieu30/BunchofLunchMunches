@@ -13,6 +13,7 @@
 var numList = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
 var expanded=true;
 var map;
+var markersArray = [];
 
 // problem: js cant read jinja rn, so it can't get the button by id, which controlled using jinja
 var initialize = function() {
@@ -107,8 +108,7 @@ var toggle = function(e) {
     
             //disappear every single result
             buttonDrop.style.display= "none";
-            //buttonDrop.onclick = addPin;
-            //buttonDrop.addEventListener("click", addPin());
+            buttonDrop.addEventListener("click", addPin());
         }
         this.style.display = "inline";
     }
@@ -129,6 +129,8 @@ var toggle = function(e) {
     
             //made all the dropdowns collapsed 
             buttonDrop.setAttribute("aria-expanded", "false");
+
+            clearPin();
         }
     }
     expanded = ! expanded
@@ -169,8 +171,10 @@ function addPin() {
         title: name,
     });
     var window = new google.maps.InfoWindow ({
-        content: grade, reviews
+        content: name //grade, reviews
       });
+      markersArray.push(pin);
+      //google.maps.event.addListener(pin)
     google.maps.event.addListener(pin, 'click', function() {
         console.log("HELPEPPEPEP");
         window.open(map, pin)
@@ -178,6 +182,13 @@ function addPin() {
       google.maps.event.addListener(map, 'click', function() {
         window.close()
       });
+}
+
+function clearPin() {
+    for (var i = 0; i < markersArray.length; i++ ) {
+        markersArray[i].setMap(null);
+    }
+    markersArray.length = 0;
 }
 
 initialize();

@@ -6,8 +6,8 @@ db = Database()
 
 @app.route("/", methods=['GET', 'POST'])
 def root():
-    restaurant name, grade, review | borough | building | street | zip code |  cuisine description | inspection date | violation code | 
-    (id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long)
+    #restaurant name, grade, review | borough | building | street | zip code |  cuisine description | inspection date | violation code | 
+    #(id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long)
     restaurants = db.getRestaurants()
     print(restaurants)
     n=len(restaurants)

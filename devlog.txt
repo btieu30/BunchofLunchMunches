@@ -193,3 +193,10 @@ briannaT -- 2023-05-17 2:51
 * added map to home.html
   - looked into how to get python data into js file, json??
 ==============================================================
+
+briannaT -- 2023-05-17 11:57
+--------------------------------------------------------------
+* added description to the README
+* pinning to the home.html - made it so that pins disappear once dropdown is collapsed
+  - need to figure out updating pin windows + details
+==============================================================
