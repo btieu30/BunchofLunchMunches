@@ -43,32 +43,46 @@ def parse():
 if __name__ == "__main__":
     parse()
 
-# 
+def searchResults(searchRequest: str):
+    searchRequest = searchRequest.lower()
+    original = searchRequest
 
-def searchResults(searchRequest):
+    seps = ['restaurant', 'restaurants', 'in', 'with', 'with a'] #separators
 
-    #remove unwanted words
-    remove_words = ['restaurant', 'restaurants', 'in', 'with', 'with a']
-    for removeWord in remove_words:
-        searchRequest = searchRequest.replace(removeWord, '')
+
+
+    # for removeWord in seps:
+    #     searchRequest = searchRequest.replace(removeWord, '')
     
-    while "  " in searchRequest:
-        searchRequest.replace('  ', ' ')
+    # while "  " in searchRequest:
+    #     searchRequest.replace('  ', ' ')
 
-    searchRequest.split(' ')
+    # searchRequest.split(' ')
     
-    filters = []
+    # filters = []
 
-    database.Database.getRestaurants(filters)
+    # database.Database.getRestaurants(filters)
 
-def matchArg(argument):
-    Boroughs = ["Brooklyn", "Manhattan", "Queens", "Staten Island", "Bronx"]
-    Cuisines = ['Sandwiches/Salads/Mixed Buffet', 'Salads', 'Egyptian', 'Filipino', 'Seafood', 'Bakery Products/Desserts', 'New American', 'Pancakes/Waffles', 'German', 'Indonesian', 'Lebanese', 'Peruvian', 'Scandinavian', 'Hotdogs/Pretzels', 'Russian', 'Middle Eastern', 'Not Listed/Not Applicable', 'Italian', 'Turkish', 'Caribbean', 'Greek', 'Donuts', 'Tex-Mex', 'African', 'American', 'Jewish/Kosher', 'Continental', 'Chinese/Cuban', 'Portuguese', 'Eastern European', 'Asian/Asian Fusion', 'Soups/Salads/Sandwiches', 'Bangladeshi', 'Tapas', 'Chicken', 'Basque', 'Chilean', 'Other', 'Pakistani', 'Mexican', 'Nuts/Confectionary', 'Spanish', 'Korean', 'Barbecue', 'Frozen Desserts', 'Australian', 'Soups', 'Polish', 'Sandwiches', 'Brazilian', 'Southwestern', 'Pizza', 'Southeast Asian', 'Creole', 'French', 'Fruits/Vegetables', 'Latin American', 'Ethiopian', 'Thai', 'Hotdogs', 'Creole/Cajun', 'Armenian', 'Chinese', 'Coffee/Tea', 'Vegetarian', 'Juice, Smoothies, Fruit Salads', 'Moroccan', 'Japanese', 'Hamburgers', 'Vegan', 'Irish', 'Czech', 'Fusion', 'Bottled Beverages', 'New French', 'Iranian', 'Chinese/Japanese', 'Californian', 'Steakhouse', 'English', 'Mediterranean', 'Afghan', 'Hawaiian', 'Indian', 'Soul Food', 'Cajun', 'Bagels/Pretzels']
-    Grades   = ['A', 'Z', 'B', 'C', 'N', 'P']
-    if argument in Boroughs:
-        return ("Borough", argument)
-    elif argument in Cuisines:
-        return ("Cuisine", argument)
-    elif argument in Grades:
-        return ("Grade")
+# check if arg is specific to borough, cuisine, etc.
+def defineType(req):
+    
+
+    return "name"
+    
+
+# TODO:
+# for check, use in
+
+def matchArg(argument: str) -> list:
+    argument = argument.title()
+    filters= {
+                "Borough": ["Brooklyn", "Manhattan", "Queens", "Staten Island", "Bronx"],
+                "Cuisine": ['Sandwiches/Salads/Mixed Buffet', 'Salads', 'Egyptian', 'Filipino', 'Seafood', 'Bakery Products/Desserts', 'New American', 'Pancakes/Waffles', 'German', 'Indonesian', 'Lebanese', 'Peruvian', 'Scandinavian', 'Hotdogs/Pretzels', 'Russian', 'Middle Eastern', 'Italian', 'Turkish', 'Caribbean', 'Greek', 'Donuts', 'Tex-Mex', 'African', 'American', 'Jewish/Kosher', 'Continental', 'Chinese/Cuban', 'Portuguese', 'Eastern European', 'Asian/Asian Fusion', 'Soups/Salads/Sandwiches', 'Bangladeshi', 'Tapas', 'Chicken', 'Basque', 'Chilean', 'Other', 'Pakistani', 'Mexican', 'Nuts/Confectionary', 'Spanish', 'Korean', 'Barbecue', 'Frozen Desserts', 'Australian', 'Soups', 'Polish', 'Sandwiches', 'Brazilian', 'Southwestern', 'Pizza', 'Southeast Asian', 'Creole', 'French', 'Fruits/Vegetables', 'Latin American', 'Ethiopian', 'Thai', 'Hotdogs', 'Creole/Cajun', 'Armenian', 'Chinese', 'Coffee/Tea', 'Vegetarian', 'Juice, Smoothies, Fruit Salads', 'Moroccan', 'Japanese', 'Hamburgers', 'Vegan', 'Irish', 'Czech', 'Fusion', 'Bottled Beverages', 'New French', 'Iranian', 'Chinese/Japanese', 'Californian', 'Steakhouse', 'English', 'Mediterranean', 'Afghan', 'Hawaiian', 'Indian', 'Soul Food', 'Cajun', 'Bagels/Pretzels'],
+                "Grade": ['A', 'Z', 'B', 'C', 'N', 'P']
+            }
+    
+    for filter in filters:
+        for type in filters[filter]:
+            if argument in type:
+                return (filter, argument)
     
