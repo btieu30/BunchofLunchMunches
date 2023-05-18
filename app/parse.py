@@ -47,9 +47,27 @@ def searchResults(searchRequest: str):
     searchRequest = searchRequest.lower()
     original = searchRequest
 
-    seps = ['restaurant', 'restaurants', 'in', 'with', 'with a'] #separators
+    #separate seps into diffeerent levels (i.e. split by spaces AFTER we've exhausted all other options)
+    seps = ['in', 'with a grade of', 'with'] 
 
+    #Brooklyn Pizza in Staten Island with a grade of A
+    #Japanese food in Brooklyn
 
+    filters = []
+    searchCriteria = []
+
+    for sep in seps: #take each sep
+        filters += searchRequest.split(sep).strip() #[Brooklyn Pizza, Staten Island with a grade of A]
+        for filter in filters:
+            searchCriteria += matchArg(filter)
+
+    #pass the finished search criteria list to getRestaurants
+    database.Database.getRestaurants(searchCriteria)
+
+ #[Brooklyn Pizza,Staten,Island with a grade of A]
+
+    #pass the finished list to getRestaurants
+    #database.Database.getRestaurants((("desc", "Pizza"), ("borough", "Queens")))
 
     # for removeWord in seps:
     #     searchRequest = searchRequest.replace(removeWord, '')
