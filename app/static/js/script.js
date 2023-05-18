@@ -14,7 +14,6 @@ var numList = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "
 var expanded=true;
 var map;
 var markersArray = [];
-
 // problem: js cant read jinja rn, so it can't get the button by id, which controlled using jinja
 var initialize = function() {
     // search button
@@ -69,7 +68,7 @@ var initialize = function() {
     var map_parameters = { center: {lat: 40.731, lng: -73.935}, zoom: 10 };
     map = new google.maps.Map(document.getElementById('map'), map_parameters);
 
-    google.maps.event.addDomListener(window, 'load', initialize);
+    // google.maps.event.addDomListener(window, 'load', initialize);
 }
 
 var populateResults = function(e) {

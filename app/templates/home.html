@@ -134,6 +134,7 @@
                   <!-- dropdown -->
                   <div class="accordion" id="accordionPanelsStayOpenExample">
                     <div class="accordion-item" id="display-section-{{numList[i]}}" id="accordion{{numList[i]}}">
+                      <!-- #(id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long) -->
 
                     <!-- preview of dropdown -->
                       <button id="button{{numList[i]}}" class="accordion-button collapsed container" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{numList[i]}}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{numList[i]}}">
@@ -141,17 +142,17 @@
                         <div class="container">
                           <div class="row">
                               <h3 id="restTitle">
-                                {{restList[i][0]}}
+                                {{restList[i][1]}}
                               </h3>
                           </div>
 
                           <div class="row">
-                            <h6 id="restGrade">grade: {{restList[i][1]}}</h6>
+                            <h6 id="restGrade">grade: {{restList[i][10]}}</h6>
                           </div>
 
-                          <div class="row">
+                          <!-- <div class="row">
                             <h6 id="restReviews">reviews: {{restList[i][2]}}</h6>
-                          </div>
+                          </div> -->
 
                           
                           <!-- save button -->                                                        
@@ -173,8 +174,8 @@
                               
                               <h5 class="card-title">Info</h5>
                               <p id="restAddress"class="card-text">{{restList[i][3]}}, {{restList[i][2]}}, NY {{restList[i][4]}}</p>
-                              <p id="restCuisine"class="card-text">{{restList[i][7]}}</p>
-                              <p id="restInspection"class="card-text">inspection date: {{restList[i][8]}}</p>
+                              <p id="restInspection"class="card-text">cuisine type: {{restList[i][8]}}</p>
+                              <p id="restCuisine"class="card-text">inspection date: {{restList[i][7]}}</p>
                               <p id="restViolation"class="card-text">violation code: {{restList[i][9]}}</p>
                             
                               <!-- save button -->
