@@ -200,3 +200,9 @@ briannaT -- 2023-05-17 11:57
 * pinning to the home.html - made it so that pins disappear once dropdown is collapsed
   - need to figure out updating pin windows + details
 ==============================================================
+
+vivianT -- 2023-05-16 21:15
+--------------------------------------------------------------
+* Populated the filtering section with the checkboxes using JS
+* Made it so that data being returned to HTML file via python can be accessed in JS, will use this to populate results instead of what we have now
+==============================================================

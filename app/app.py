@@ -9,10 +9,10 @@ def root():
     #restaurant name, grade, review | borough | building | street | zip code |  cuisine description | inspection date | violation code | 
     #(id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long)
     restaurants = db.getRestaurants()
-    # print(restaurants)
     n=len(restaurants)
     if (n>10):
         n = 10
+        
     # McDonalds = ["McDonalds (DBA)", "A", "5.0", "borough", "building", "street", "zip code", "cuisine description", "inspection date", "violation code",]
     # Popeyes0 = ["Popeyes (DBA)", "A", "5.0", "borough", "building", "street", "zip code", "cuisine description", "inspection date", "violation code",]
     # Popeyes1 = ["Popeyes (DBA)", "A", "5.0", "borough", "building", "street", "zip code", "cuisine description", "inspection date", "violation code",]

@@ -22,12 +22,19 @@ var initialize = function() {
     console.log(searchButton);
     searchButton.onclick = displayResults;
 
+    // populate results
+    populateResults();
+    //populate filters
+    populateFilter();
+
     // clicking on filtering dropdowns
     var borough = document.getElementById("borough");
     borough.onclick = filter;
     var grade = document.getElementById("grade");
     grade.onclick = filter;
     var rating = document.getElementById("rating");
+    rating.onclick = filter;
+    var rating = document.getElementById("cuisine");
     rating.onclick = filter;
 
     // go through results dropdowns to see if user clicks on them
@@ -65,6 +72,15 @@ var initialize = function() {
     google.maps.event.addDomListener(window, 'load', initialize);
 }
 
+var populateResults = function(e) {
+    // get data from flask via html/jinja
+    var restList = document.getElementById("data0").innerHTML;
+    var n = document.getElementById("data1").innerHTML;
+
+    console.log(restList);
+    console.log(n);
+}
+
 var filter = function(e) {
     var mainButton = document.getElementById("filter");
     mainButton.innerHTML = this.innerHTML;
@@ -73,10 +89,48 @@ var filter = function(e) {
     insideSearchBar.placeholder = this.innerHTML;
 }
 
-var populate = function() {
+var populateFilter = function() {
+    console.log("running populate()........")
     var mainDropdown = document.getElementById("filter-dropdown");
+    var firstRow = document.getElementById("first-row");
+    var filterList = [["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"],
+                        ["A", "B", "C", "D", "F"],
+                        ["5","4","3","2","1"],
+                        ["type1", "type2", "type3", "type4","type5"]];
+    // create 5 new rows
     for (let i=0; i<5; i++) {
-        var newRow = document.createElement("row");
+        var newRow = document.createElement("div");
+        newRow.className = "row";
+        mainDropdown.appendChild(newRow);
+
+        // populate the 4 sections (borough, grade, etc...)
+        for (let j=0; j<4; j++) {
+
+        //   <div class="form-check form-check-inline col">
+        //     <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+        //     <label class="form-check-label" for="inlineCheckbox1">Borough</label>
+        //   </div>
+
+            var newCol = document.createElement("div");
+            newCol.setAttribute("class", "form-check form-check-inline col");
+            newCol.setAttribute("id", filterList[j][i]);
+            newRow.appendChild(newCol);
+
+            var newInput = document.createElement("input");
+            newInput.setAttribute("class", "form-check-input");
+            newInput.setAttribute("type", "checkbox");
+            newInput.setAttribute("id", "inlineCheckbox"+(j+1)*(i+1));
+            newInput.setAttribute("value", "option1");
+
+            var newLabel = document.createElement("label");
+            newLabel.setAttribute("class", "form-check-label");
+            newLabel.setAttribute("for", "inlineCheckbox"+(j+1)*(i+1));
+
+            newCol.appendChild(newInput);
+            newCol.appendChild(newLabel);
+
+            newLabel.innerHTML = filterList[j][i];
+        }
     }
 }
 // clicking search button
