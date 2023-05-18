@@ -206,3 +206,17 @@ vivianT -- 2023-05-16 21:15
 * Populated the filtering section with the checkboxes using JS
 * Made it so that data being returned to HTML file via python can be accessed in JS, will use this to populate results instead of what we have now
 ==============================================================
+
+anthonyS (traveller) -- 2023-05-18 13:00
+--------------------------------------------------------------
+Legendary Tribble
+- Using Spotify API to suggest and lookup songs
+Dancing New Jeans
+- Zillo clone, no backend yet
+Bubbling Banjos
+- Using leaflet map, makes use of multiple crime statistic datasets to determine area safety
+Silly ramen obliterates frog
+- Quiz on county winners in the 2020 presidential election, with bar graphs/pie charts detailing education and unemployment rates for that county.
+- Dark mode!
+- Really funny idea
+==============================================================
