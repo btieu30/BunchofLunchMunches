@@ -36,6 +36,9 @@ var initialize = function() {
     //populate filters
     populateFilter();
 
+    //check checkbox for filter
+    checkFilter();
+
     // clicking on filtering dropdowns
     var borough = document.getElementById("borough");
     borough.onclick = filter;
@@ -95,30 +98,29 @@ var filter = function(e) {
 
 var populateFilter = function() {
     console.log("running populate()........")
-    var mainDropdown = document.getElementById("filter-dropdown");
-    var firstRow = document.getElementById("first-row");
     var filterList = [["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"],
                         ["A", "B", "C", "D", "F"],
                         ["5","4","3","2","1"],
                         ["type1", "type2", "type3", "type4","type5"]];
-    // create 5 new rows
-    for (let i=0; i<5; i++) {
-        var newRow = document.createElement("div");
-        newRow.className = "row";
-        mainDropdown.appendChild(newRow);
+    var dropdownList = ["borough-dropdown", "grade-dropdown", "cuisine-dropdown"];
+    for (let i=0; i<filterList.length; i++) {
+        // get dropdown
+        var mainDropdown = document.getElementById(dropdownList[i]);
 
-        // populate the 4 sections (borough, grade, etc...)
-        for (let j=0; j<4; j++) {
+        for (let j=0; j<filterList[i]; j++) {
+            var newRow = document.createElement("div");
+            newRow.className = "row";
+
+            // add checklist to dropdown
+            mainDropdown.appendChild(newRow);
 
         //   <div class="form-check form-check-inline col">
         //     <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
         //     <label class="form-check-label" for="inlineCheckbox1">Borough</label>
         //   </div>
 
-            var newCol = document.createElement("div");
-            newCol.setAttribute("class", "form-check form-check-inline col");
-            newCol.setAttribute("id", filterList[j][i]);
-            newRow.appendChild(newCol);
+            newRow.setAttribute("class", "form-check form-check-inline col");
+            newRow.setAttribute("id", filterList[j][i]);
 
             var newInput = document.createElement("input");
             newInput.setAttribute("class", "form-check-input");
@@ -130,10 +132,10 @@ var populateFilter = function() {
             newLabel.setAttribute("class", "form-check-label");
             newLabel.setAttribute("for", "inlineCheckbox"+(j+1)*(i+1));
 
-            newCol.appendChild(newInput);
-            newCol.appendChild(newLabel);
+            newRow.appendChild(newInput);
+            newRow.appendChild(newLabel);
 
-            newLabel.innerHTML = filterList[j][i];
+            newLabel.innerHTML = filterList[i][j];
         }
     }
 }
@@ -155,6 +157,31 @@ var displayResults = function(e) {
 
     // display results
     results.style.display = "inline";
+}
+
+var checkFilter = function() {
+    var checkbox = document.getElementById("filterCheckbox");
+    console.log(checkbox);
+    var dropdowns = document.getElementById("filterDropdowns");
+
+    if (checkbox.checked == true) {
+        dropdowns.style.display = "inline";
+    }
+    else {
+        dropdowns.style.display = "none";
+    }
+
+    checkbox.onclick = displayFilter;
+}
+
+var displayFilter = function(e) {
+    var dropdowns = document.getElementById("filterDropdowns");
+    if (this.checked == true) {
+        dropdowns.style.display = "inline";
+    }
+    else {
+        dropdowns.style.display = "none";
+    }
 }
 
 var toggle = function(e) {

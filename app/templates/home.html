@@ -116,6 +116,56 @@
 
         </div>
 
+        <!-- filtering -->
+        <div class="row">
+          <div class="col">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="filterCheckbox" value="option1">
+              <label class="form-check-label" for="filterCheckbox">Filter?</label>
+            </div>
+          </div>
+
+          <div class="container" id="filterDropdowns" style="display:none;">
+            <div class="row">
+              <div class="col">
+                <form class="input-group rounded"> 
+                  <button id="filter" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Borough
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <div class = "container dropdown-item" id="borough-dropdown">                               
+                      hello
+                    </div>
+                  </div>            
+                </form>
+              </div>
+
+              <div class="col">
+                <button id="filter" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Grade
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                  <div class = "container dropdown-item" id="grade-dropdown">                               
+
+                  </div>
+                </div>            
+              </div>
+
+              <div class="col">
+                <button id="filter" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Cuisine
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                  <div class = "container dropdown-item" id="cuisine-dropdown">                               
+
+                  </div>
+                </div>            
+              </div>
+            </div>
+          </div>
+
+          </div>
+
         <!-- saved rest button -->
         <div class=row id="divSave">
           <div class="d-flex justify-content-center">
