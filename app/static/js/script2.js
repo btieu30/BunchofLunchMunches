@@ -16,6 +16,16 @@ var expanded=true;
 
 var map;
 
+// restList, num of results, saveList
+var restList = document.getElementById("data0").innerHTML;
+restList = JSON.parse(restList);
+
+console.log(restList);
+console.log(restList[0]);
+
+var n = document.getElementById("data1").innerHTML;
+var saveList = [];
+
 // problem: js cant read jinja rn, so it can't get the button by id, which controlled using jinja
 var initialize = function() {
     var numOfDropdowns = results.getElementsByClassName("accordion").length;
@@ -113,7 +123,21 @@ var clickSave = function(e) {
     var unsave = document.getElementById(unsaveID);
     unsave.style.display = "inline";
 
-    // ****** also need to add restaurant to list of saved!!!
+    // add restaurant to list of saved
+    var buttonDrop = document.getElementById("button"+this.id.slice(4));
+    // get ID of the restaurant
+    var restID = buttonDrop.getAttribute("data-id");
+    var index;
+
+    // find what index this restaurant is in restList
+    for (var i=0; i<restList.length; i++){
+        if (restID==restList[i][0]) {
+            index = i;
+        }
+    }
+    // add array (restaurant) to saveList
+    saveList.push(restList[index]);
+    console.log("**** save list: "+saveList);
 }
 
 var clickUnsave = function(e) {
@@ -125,7 +149,21 @@ var clickUnsave = function(e) {
     var save = document.getElementById(saveID);
     save.style.display = "inline";
 
-    // ****** also need to remove restaurant from list of saved!!!
+    // remove restaurant from list of saved
+    var buttonDrop = document.getElementById("button"+saveID.slice(4));
+    // get ID of the restaurant
+    var restID = buttonDrop.getAttribute("data-id");
+    var index;
+
+    // find what index this restaurant is in saveList
+    for (var i=0; i<saveList.length; i++){
+        if (restID==saveList[i][0]) {
+            index = i;
+        }
+    }
+    // remove array (restaurant) from saveList
+    saveList.splice(index, 1);
+    console.log("**** save list: "+saveList);
 }
 
 function addPin() {

@@ -220,3 +220,10 @@ Silly ramen obliterates frog
 - Dark mode!
 - Really funny idea
 ==============================================================
+
+vivianT -- 2023-05-18 20:01
+--------------------------------------------------------------
+* Made saving/unsaving restaurant work, kind of. Saves and unsaves to an array, but the two javascript files aren't connected yet so they don't access the same array. Will do that.
+* Synchronized some save.html and home.html code/functions
+* Made it so that initialize isn't running twice anymore
+==============================================================

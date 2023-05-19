@@ -38,6 +38,7 @@
 
     <!-- our js -->
     <script type="module" src="../static/js/script.js"></script>
+    
     <!-- <script type="text/javascript">
       var restaurantList = {{restList|tojson}};
       var num = {{n}};
@@ -137,7 +138,7 @@
                       <!-- #(id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long) -->
 
                     <!-- preview of dropdown -->
-                      <button id="button{{numList[i]}}" class="accordion-button collapsed container" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{numList[i]}}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{numList[i]}}">
+                      <button id="button{{numList[i]}}" data-id="{{restList[i][0]}}" class="accordion-button collapsed container" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{numList[i]}}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{numList[i]}}">
                         
                         <div class="container">
                           <div class="row">
@@ -150,15 +151,9 @@
                             <h6 id="restGrade">grade: {{restList[i][10]}}</h6>
                           </div>
 
-                          <!-- <div class="row">
-                            <h6 id="restReviews">reviews: {{restList[i][2]}}</h6>
-                          </div> -->
-
-                          
-                          <!-- save button -->                                                        
                           <div class="row">
-
-                          </div>
+                            <h6 id="restReviews">reviews: {{restList[i][2]}}</h6>
+                          </div>                    
                           
                         </div>
                       </button>
@@ -174,10 +169,10 @@
                               
                               <h5 class="card-title">Info</h5>
                               <p id="restAddress"class="card-text">{{restList[i][3]}}, {{restList[i][2]}}, NY {{restList[i][4]}}</p>
-                              <p id="restInspection"class="card-text">cuisine type: {{restList[i][8]}}</p>
-                              <p id="restCuisine"class="card-text">inspection date: {{restList[i][7]}}</p>
-                              <p id="restViolation"class="card-text">violation code: {{restList[i][9]}}</p>
-                            
+                              <p id="restCuisine"class="card-text">cuisine type: {{restList[i][5]}}</p>
+                              <p id="restInspection"class="card-text">inspection date: {{restList[i][6]}}</p>
+                              <p id="restViolation"class="card-text">violation code: {{restList[i][8]}}</p>
+                              
                               <!-- save button -->
                               <a href="#" id="save{{numList[i]}}" class="btn btn-secondary">
                                 <svg id="star{{numList[i]}}" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">

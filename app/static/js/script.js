@@ -14,7 +14,17 @@ var numList = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "
 var expanded=true;
 var map;
 var markersArray = [];
-// problem: js cant read jinja rn, so it can't get the button by id, which controlled using jinja
+
+// restList, num of results, saveList
+var restList = document.getElementById("data0").innerHTML;
+restList = JSON.parse(restList);
+
+console.log(restList);
+console.log(restList[0]);
+
+var n = document.getElementById("data1").innerHTML;
+var saveList = [];
+
 var initialize = function() {
     // search button
     var searchButton = document.getElementById("search-button");
@@ -72,12 +82,7 @@ var initialize = function() {
 }
 
 var populateResults = function(e) {
-    // get data from flask via html/jinja
-    var restList = document.getElementById("data0").innerHTML;
-    var n = document.getElementById("data1").innerHTML;
 
-    console.log(restList);
-    console.log(n);
 }
 
 var filter = function(e) {
@@ -167,7 +172,7 @@ var toggle = function(e) {
     
             //disappear every single result
             buttonDrop.style.display= "none";
-            buttonDrop.addEventListener("click", addPin());
+            // buttonDrop.addEventListener("click", addPin());
         }
         this.style.display = "inline";
     }
@@ -188,9 +193,8 @@ var toggle = function(e) {
     
             //made all the dropdowns collapsed 
             buttonDrop.setAttribute("aria-expanded", "false");
-
-            clearPin();
         }
+        clearPin();
     }
     expanded = ! expanded
 }
@@ -204,7 +208,21 @@ var clickSave = function(e) {
     var unsave = document.getElementById(unsaveID);
     unsave.style.display = "inline";
 
-    // ****** also need to add restaurant to list of saved!!!
+    // add restaurant to list of saved
+    var buttonDrop = document.getElementById("button"+this.id.slice(4));
+    // get ID of the restaurant
+    var restID = buttonDrop.getAttribute("data-id");
+    var index;
+
+    // find what index this restaurant is in restList
+    for (var i=0; i<restList.length; i++){
+        if (restID==restList[i][0]) {
+            index = i;
+        }
+    }
+    // add array (restaurant) to saveList
+    saveList.push(restList[index]);
+    console.log("**** save list: "+saveList);
 }
 
 var clickUnsave = function(e) {
@@ -216,7 +234,21 @@ var clickUnsave = function(e) {
     var save = document.getElementById(saveID);
     save.style.display = "inline";
 
-    // ****** also need to remove restaurant from list of saved!!!
+    // remove restaurant from list of saved
+    var buttonDrop = document.getElementById("button"+saveID.slice(4));
+    // get ID of the restaurant
+    var restID = buttonDrop.getAttribute("data-id");
+    var index;
+
+    // find what index this restaurant is in saveList
+    for (var i=0; i<saveList.length; i++){
+        if (restID==saveList[i][0]) {
+            index = i;
+        }
+    }
+    // remove array (restaurant) from saveList
+    saveList.splice(index, 1);
+    console.log("**** save list: "+saveList);
 }
 
 function addPin() {
@@ -230,7 +262,7 @@ function addPin() {
         title: name,
     });
     var window = new google.maps.InfoWindow ({
-        content: name //grade, reviews
+        content: grade, reviews //grade, reviews
       });
       markersArray.push(pin);
       //google.maps.event.addListener(pin)
