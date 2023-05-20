@@ -57,6 +57,9 @@ var initialize = function() {
         if (buttonDrop!=null) {
             buttonDrop.onclick = toggle;
         }
+        if (document.getElementById("home")==null) {
+            buttonDrop.onclick = show;
+        }
 
         // if user clicks save
         var saveID = "save"+num;
@@ -186,10 +189,128 @@ var displayResultsSave = function() {
         var r1 = document.createElement("div");
         cont.appendChild(r1);
         r1.setAttribute("class", "row");
-        var h3 = document.createAttribute("h3");
-        r1.after(h3);
+        var h3 = document.createElement("h3");
+        r1.appendChild(h3);
         h3.setAttribute("id", "restTitle");
         h3.innerHTML = restList[i][1];
+
+        var r2 = document.createElement("div");
+        cont.appendChild(r2);
+        r2.setAttribute("class", "row");
+        var h6 = document.createElement("h6");
+        r2.appendChild(h6);
+        h6.setAttribute("id", "restGrade");
+        h6.innerHTML = "grade: "+restList[i][10];
+
+        var insideDropdown = document.createElement("div");
+        accordionItem.appendChild(insideDropdown);
+        insideDropdown.setAttribute("id", "panelsStayOpen-collapse"+numList[i]);
+        insideDropdown.setAttribute("class", "accordion-collapse collapse");
+
+        button.onclick = show;
+
+        insideDropdown.setAttribute("aria-labelledby", "panelsStayOpen-heading"+numList[i]);
+
+        var accordionBody = document.createElement("div");
+        insideDropdown.appendChild(accordionBody);
+        accordionBody.setAttribute("class", "accordion-body");
+
+        var contCenter = document.createElement("div");
+        accordionBody.appendChild(contCenter);
+        contCenter.setAttribute("class", "container center");
+
+        var card = document.createElement("div");
+        contCenter.appendChild(card);
+        card.setAttribute("class", "card");
+        card.setAttribute("style", "width:18rem;");
+
+        var cardBody = document.createElement("div");
+        card.appendChild(cardBody);
+        cardBody.setAttribute("class", "card-body");
+
+        var h5 = document.createElement("h5");
+        cardBody.appendChild(h5);
+        h5.setAttribute("class", "card-title");
+        h5.innerHTML = "Info";
+
+        var p1 = document.createElement("p");
+        cardBody.appendChild(p1);
+        p1.setAttribute("id", "restAddress");
+        p1.setAttribute("class", "card-text");
+        p1.innerHTML = restList[i][3]+", "+ restList[i][2]+", NY "+ restList[i][4];
+
+        var p2 = document.createElement("p");
+        cardBody.appendChild(p2);
+        p2.setAttribute("id", "restCuisine");
+        p2.setAttribute("class", "card-text");
+        p2.innerHTML = "cuisine type: "+restList[i][5];
+
+        var p3 = document.createElement("p");
+        cardBody.appendChild(p3);
+        p3.setAttribute("id", "restInspection");
+        p3.setAttribute("class", "card-text");
+        p3.innerHTML = "inspection type: "+restList[i][6];
+
+        var p4 = document.createElement("p");
+        cardBody.appendChild(p4);
+        p4.setAttribute("id", "restViolation");
+        p4.setAttribute("class", "card-text");
+        p4.innerHTML = "violation type: "+restList[i][8];
+    }
+}
+
+var show = function() {
+    //toggle
+    if (expanded) {
+        for (let i = 0; i < numList.length; i++) {
+            var num = numList[i];
+    
+            //get id name
+            var buttonID = "button"+num;
+            console.log(buttonID);
+    
+            //fetch dropdown by id
+            var buttonDrop = document.getElementById(buttonID);
+            console.log(buttonDrop);
+    
+            //disappear every single result
+            if (buttonDrop!=null) {
+                buttonDrop.style.display= "none";
+            }
+            // buttonDrop.addEventListener("click", addPin());
+        }
+        this.style.display = "inline";
+    }
+    else {
+        for (let i = 0; i < numList.length; i++) {
+            var num = numList[i];
+    
+            //get id name
+            var buttonID = "button"+num;
+            console.log(buttonID);
+    
+            //fetch dropdown by id
+            var buttonDrop = document.getElementById(buttonID);
+            console.log(buttonDrop);
+    
+            //re-appear every single result
+            if (buttonDrop!=null) {
+                buttonDrop.style.display= "inline";                               
+                //made all the dropdowns collapsed 
+                buttonDrop.setAttribute("aria-expanded", "false");
+            }
+        }
+        clearPin();
+    }
+    expanded = ! expanded
+    var id = "panelsStayOpen-collapse"+this.id.slice(6);
+    var panel = document.getElementById(id);
+    console.log(panel);
+    if (panel.className === "accordion-collapse collapse") {
+        panel.setAttribute("class", "accordion-collapse collapse show")
+    }
+    else {
+        panel.setAttribute("class", "accordion-collapse collapse");
     }
 }
 
@@ -317,7 +438,6 @@ var clickUnsave = function(e) {
 function addPin() {
     var name = document.getElementById("restTitle").innerHTML;
     var grade = document.getElementById("restGrade").innerHTML;
-    var reviews = document.getElementById("restReviews").innerHTML;
     var pin = new google.maps.Marker ({
         //replace with selected restaurant's lat and long
         position:{lat: 40.777, lng: -73.955},
@@ -325,7 +445,7 @@ function addPin() {
         title: name,
     });
     var window = new google.maps.InfoWindow ({
-        content: grade, reviews //grade, reviews
+        content: grade //grade
       });
       markersArray.push(pin);
       //google.maps.event.addListener(pin)

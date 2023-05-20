@@ -227,3 +227,15 @@ vivianT -- 2023-05-18 20:01
 * Synchronized some save.html and home.html code/functions
 * Made it so that initialize isn't running twice anymore
 ==============================================================
+
+vivianT -- 2023-05-20 00:37
+--------------------------------------------------------------
+* Finished making the filter and formatting it
+* Consolidated home.html and save.html's js so that it can all live in one file. 
+* Populating save.html's results using JS.
+******************* DO NOT USE SCRIPT2.JS ************************
+==============================================================
+******************* DO NOT USE SCRIPT2.JS ************************
+******************* DO NOT USE SCRIPT2.JS ************************
+
+
