@@ -43,23 +43,52 @@ def parse():
 if __name__ == "__main__":
     parse()
 
-def searchResults(searchRequest: str):
+def searchResults(request: str):
+    output=[]
+    request = request.lower()
+    seps = [' in ', 'of grade', 'with a grade of', 'serving', ' food', 'restaurant'] #organize seps by order (borough)
+    sepMatched = False
+    for sep in seps:
+        if sep in request:
+            sepMatched=True
+            i = request.index(sep)
+            begin = request[:i].strip()
+            end = request[i+len(sep):].strip()
+            break
+    if sepMatched:
+        for pair in searchResults(begin):
+            output.append(pair)
+        for pair in searchResults(end):
+            output.append(pair)
+        return output
+    else:
+        matchArg(request)
+        return (("Name", request))
+            
+    
+def searchResultsOLD(searchRequest: str):
     searchRequest = searchRequest.lower()
     original = searchRequest
 
     #separate seps into diffeerent levels (i.e. split by spaces AFTER we've exhausted all other options)
-    seps = ['in', 'with a grade of', 'with'] 
+    seps = [' in ', 'with a grade of', 'with', 'serving', 'food', 'restaurant'] #organize seps by order (borough)
 
     #Brooklyn Pizza in Staten Island with a grade of A
     #Japanese food in Brooklyn
 
-    filters = []
+    arg = ""
+    matchArg(arg)[0] == "Name"
+
+    # filters = [0,0]
     searchCriteria = []
 
     for sep in seps: #take each sep
-        filters += searchRequest.split(sep).strip() #[Brooklyn Pizza, Staten Island with a grade of A]
+        # 3 dropdowns: 1. borough, 1 grade, 1 cuisine.
+        filters = [x.strip() for x in searchRequest.split(sep)] #[Brooklyn Pizza, Staten Island with a grade of A]
         for filter in filters:
-            searchCriteria += matchArg(filter)
+            if matchArg(filter) != None:
+                searchCriteria += matchArg(filter)
+                searchRequest = filters[1] #.replace(filters[0], "")
 
     #pass the finished search criteria list to getRestaurants
     database.Database.getRestaurants(searchCriteria)
@@ -86,7 +115,6 @@ def defineType(req):
     
 
     return "name"
-    
 
 # TODO:
 # for check, use in
@@ -103,4 +131,5 @@ def matchArg(argument: str) -> list:
         for type in filters[filter]:
             if argument in type:
                 return (filter, argument)
+    return None
     
