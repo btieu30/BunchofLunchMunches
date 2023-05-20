@@ -31,8 +31,19 @@ h2 {
 }
 
 .dropdown-menu {
-    width: 750%;
-    height: 500%;
+    /* width: 100%;
+    height: 500%; */
+}
+
+#filterDropdowns {
+    padding:2%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#filter {
+    margin-left:auto;
+    margin-right:auto;
 }
 
 /* #button1 {

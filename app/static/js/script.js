@@ -24,30 +24,26 @@ console.log(restList[0]);
 
 var n = document.getElementById("data1").innerHTML;
 var saveList = [];
+numList = numList.slice(0,n);
 
 var initialize = function() {
     // search button
     var searchButton = document.getElementById("search-button");
-    console.log(searchButton);
-    searchButton.onclick = displayResults;
+    if (searchButton != null) {
+        searchButton.onclick = displayResultsHome;
+    }
 
-    // populate results
-    populateResults();
-    //populate filters
-    populateFilter();
-
-    //check checkbox for filter
-    checkFilter();
-
-    // clicking on filtering dropdowns
-    var borough = document.getElementById("borough");
-    borough.onclick = filter;
-    var grade = document.getElementById("grade");
-    grade.onclick = filter;
-    var rating = document.getElementById("rating");
-    rating.onclick = filter;
-    var rating = document.getElementById("cuisine");
-    rating.onclick = filter;
+    if (document.getElementById("home")!=null) {
+        // populate results
+        populateResults();
+        //populate filters
+        populateFilter();
+        //check checkbox for filter
+        checkFilter();
+    }
+    else {
+        displayResultsSave();
+    }
 
     // go through results dropdowns to see if user clicks on them
     for (let i = 0; i < numList.length; i++) {
@@ -58,25 +54,25 @@ var initialize = function() {
         var buttonDrop = document.getElementById(buttonID);
 
         // if button is clicked for that one result, disappear every other results
-        buttonDrop.onclick = toggle;
+        if (buttonDrop!=null) {
+            buttonDrop.onclick = toggle;
+        }
 
         // if user clicks save
         var saveID = "save"+num;
-        console.log(saveID);
-
         var save = document.getElementById(saveID);
-        console.log(save);
 
-        save.onclick = clickSave;
+        if (save!=null) {
+            save.onclick = clickSave;
+        }
 
         // unsave
         var unsaveID = "unsave"+num;
-        console.log(unsaveID);
-
         var unsave = document.getElementById(unsaveID);
-        console.log(unsave);
 
-        unsave.onclick = clickUnsave;
+        if (unsave!=null) {
+            unsave.onclick = clickUnsave;
+        }
     }
     var map_parameters = { center: {lat: 40.731, lng: -73.935}, zoom: 10 };
     map = new google.maps.Map(document.getElementById('map'), map_parameters);
@@ -88,59 +84,61 @@ var populateResults = function(e) {
 
 }
 
-var filter = function(e) {
-    var mainButton = document.getElementById("filter");
-    mainButton.innerHTML = this.innerHTML;
-
-    var insideSearchBar = document.getElementById("search-input");
-    insideSearchBar.placeholder = this.innerHTML;
-}
-
 var populateFilter = function() {
     console.log("running populate()........")
     var filterList = [["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"],
                         ["A", "B", "C", "D", "F"],
-                        ["5","4","3","2","1"],
                         ["type1", "type2", "type3", "type4","type5"]];
     var dropdownList = ["borough-dropdown", "grade-dropdown", "cuisine-dropdown"];
+
+    console.log("**************dropdownlist"+dropdownList);
+    console.log(filterList.length);
+
     for (let i=0; i<filterList.length; i++) {
         // get dropdown
         var mainDropdown = document.getElementById(dropdownList[i]);
 
-        for (let j=0; j<filterList[i]; j++) {
-            var newRow = document.createElement("div");
-            newRow.className = "row";
+        for (let j=0; j<filterList[i].length; j++) {
+            var newCheck = document.createElement("div");
+            newCheck.className = "form-check";
 
             // add checklist to dropdown
-            mainDropdown.appendChild(newRow);
+            mainDropdown.appendChild(newCheck);
+            console.log("***********maindropdown"+mainDropdown);
+            // <div class="form-check">
+            //     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            //     <label class="form-check-label" for="flexRadioDefault1">
+            //       Default radio
+            //     </label>
+            //   </div>
+            //   <div class="form-check">
+            //     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+            //     <label class="form-check-label" for="flexRadioDefault2">
+            //       Default checked radio
+            //     </label>
+            //   </div>
 
-        //   <div class="form-check form-check-inline col">
-        //     <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-        //     <label class="form-check-label" for="inlineCheckbox1">Borough</label>
-        //   </div>
-
-            newRow.setAttribute("class", "form-check form-check-inline col");
-            newRow.setAttribute("id", filterList[j][i]);
+            newCheck.setAttribute("id", filterList[i][j]);
 
             var newInput = document.createElement("input");
             newInput.setAttribute("class", "form-check-input");
-            newInput.setAttribute("type", "checkbox");
-            newInput.setAttribute("id", "inlineCheckbox"+(j+1)*(i+1));
-            newInput.setAttribute("value", "option1");
+            newInput.setAttribute("type", "radio");
+            newInput.setAttribute("id", "flexRadioDefault"+(j+1)*(i+1));
+            newInput.setAttribute("name", "flexRadioDefault");
 
             var newLabel = document.createElement("label");
             newLabel.setAttribute("class", "form-check-label");
-            newLabel.setAttribute("for", "inlineCheckbox"+(j+1)*(i+1));
+            newLabel.setAttribute("for", "flexRadioDefault"+(j+1)*(i+1));
 
-            newRow.appendChild(newInput);
-            newRow.appendChild(newLabel);
+            newCheck.appendChild(newInput);
+            newCheck.appendChild(newLabel);
 
             newLabel.innerHTML = filterList[i][j];
         }
     }
 }
 // clicking search button
-var displayResults = function(e) {
+var displayResultsHome = function(e) {
     // get results element (col)
     var results = document.getElementById("results");
 
@@ -151,17 +149,52 @@ var displayResults = function(e) {
     // splice numList so all our other functions that use it are accurate (ex: when getting button ids: buttonOne, buttonTwo, ...)
     numList = numList.splice(0,numOfDropdowns);
 
-    // make main dropdown say "Filter" again
-    var mainButton = document.getElementById("filter");
-    mainButton.innerHTML = "Filter";
-
     // display results
     results.style.display = "inline";
 }
 
+var displayResultsSave = function() {
+    var results = document.getElementById("results");
+    console.log("running displayresultssave........");
+    for (var i=0; i<n; i++) {
+        var accordion = document.createElement("div");
+        results.appendChild(accordion);
+        accordion.setAttribute("id", "accordionPanelsStayOpenExample");
+        accordion.setAttribute("class", "accordion")
+
+        var accordionItem = document.createElement("div");
+        accordion.appendChild(accordionItem);
+        accordionItem.setAttribute("class", "accordion-item")
+        accordionItem.setAttribute("id", "display-section-"+numList[i]);
+
+        //preview of dropdown
+        var button = document.createElement("button");
+        accordionItem.appendChild(button);
+        button.setAttribute("id", "button"+numList[i]);
+        button.setAttribute("data-id", restList[i][0]);
+        button.setAttribute("class", "accordion-button collapsed container");
+        button.setAttribute("type", "button");
+        button.setAttribute("data-bs-toggle", "collapse");
+        button.setAttribute("data-bs-target", "#panelStayOpen-collapse"+numList[i]);
+        button.setAttribute("aria-expanded", "false");
+        button.setAttribute("aria-controls", "panelsStayOpen-collapse"+numList[i]);
+
+        var cont = document.createElement("div");
+        button.appendChild(cont);
+        cont.setAttribute("class", "container");
+
+        var r1 = document.createElement("div");
+        cont.appendChild(r1);
+        r1.setAttribute("class", "row");
+        var h3 = document.createAttribute("h3");
+        r1.after(h3);
+        h3.setAttribute("id", "restTitle");
+        h3.innerHTML = restList[i][1];
+    }
+}
+
 var checkFilter = function() {
     var checkbox = document.getElementById("filterCheckbox");
-    console.log(checkbox);
     var dropdowns = document.getElementById("filterDropdowns");
 
     if (checkbox.checked == true) {
@@ -198,7 +231,9 @@ var toggle = function(e) {
             console.log(buttonDrop);
     
             //disappear every single result
-            buttonDrop.style.display= "none";
+            if (buttonDrop!=null) {
+                buttonDrop.style.display= "none";
+            }
             // buttonDrop.addEventListener("click", addPin());
         }
         this.style.display = "inline";
@@ -216,10 +251,11 @@ var toggle = function(e) {
             console.log(buttonDrop);
     
             //re-appear every single result
-            buttonDrop.style.display= "inline";
-    
-            //made all the dropdowns collapsed 
-            buttonDrop.setAttribute("aria-expanded", "false");
+            if (buttonDrop!=null) {
+                buttonDrop.style.display= "inline";                               
+                //made all the dropdowns collapsed 
+                buttonDrop.setAttribute("aria-expanded", "false");
+            }
         }
         clearPin();
     }

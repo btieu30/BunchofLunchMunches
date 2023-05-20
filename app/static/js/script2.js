@@ -26,7 +26,6 @@ console.log(restList[0]);
 var n = document.getElementById("data1").innerHTML;
 var saveList = [];
 
-// problem: js cant read jinja rn, so it can't get the button by id, which controlled using jinja
 var initialize = function() {
     var numOfDropdowns = results.getElementsByClassName("accordion").length;
     console.log("num of dropdowns/results: "+numOfDropdowns);
@@ -39,9 +38,7 @@ var initialize = function() {
 
         // if user clicks on dropdown
         var buttonID = "button"+num;
-        console.log(buttonID);
         var buttonDrop = document.getElementById(buttonID);
-        console.log(buttonDrop);
         //add another event for buttonDrop to create dynamic map pinning, based on what is clicked,
         //map pins should be automatically updated with info abt restaurant upon click
 

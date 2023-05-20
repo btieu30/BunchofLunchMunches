@@ -46,7 +46,7 @@
 
   </head>
 
-  <body>
+  <body id="home">
     <!-- data attribute to send flask data to js -->
     <div id="data0" style="display:none;">{{restList|tojson}}</div>
     <div id="data1" style="display:none;">{{n}}</div>
@@ -82,27 +82,17 @@
     <div class="container">
       <!-- separate row for title+search bar -->
         <div id="top" class="row">
+            
             <h1>Clean Restaurants</h1>
+                        
             <!-- search bar -->
             <!-- action="/search" method="POST"  -->
             <form class="input-group rounded"> 
-              <!-- dropdowns (filtering) -->
-              <div class="dropdown">
-                <button id="filter" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Filter
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <div class = "container dropdown-item" id="filter-dropdown">
-                    <!-- title row -->
-                    <div class="row" id="first-row">                                         
-                      <div id="borough" class="col">Borough</div>
-                      <div id="grade" class="col">Grade</div>
-                      <div id="rating" class="col">Rating</div>
-                      <div id="cuisine" class="col">Cuisine</div>
-                    </div>                  
 
-                  </div>
-                </div>
+              <!-- filtering -->
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="filterCheckbox" value="option1">
+                <label class="form-check-label" for="filterCheckbox">Filter?</label>
               </div>
 
               <input id="search-input" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />        
@@ -112,19 +102,13 @@
                   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                 </svg>
               </button>
+
             </form> 
 
         </div>
 
-        <!-- filtering -->
+        <!-- dropdowns -->
         <div class="row">
-          <div class="col">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="filterCheckbox" value="option1">
-              <label class="form-check-label" for="filterCheckbox">Filter?</label>
-            </div>
-          </div>
-
           <div class="container" id="filterDropdowns" style="display:none;">
             <div class="row">
               <div class="col">
@@ -134,37 +118,46 @@
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                     <div class = "container dropdown-item" id="borough-dropdown">                               
-                      hello
+                      <!-- checklist -->
                     </div>
                   </div>            
                 </form>
               </div>
 
               <div class="col">
-                <button id="filter" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Grade
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <div class = "container dropdown-item" id="grade-dropdown">                               
+                <form class="input-group rounded"> 
+                  <button id="filter" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Grade
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <div class = "container dropdown-item" id="grade-dropdown">                               
 
-                  </div>
-                </div>            
+                    </div>
+                  </div>  
+                </form>          
               </div>
 
               <div class="col">
-                <button id="filter" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Cuisine
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <div class = "container dropdown-item" id="cuisine-dropdown">                               
+                <form class="input-group rounded"> 
+                  <button id="filter" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Cuisine
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <div class = "container dropdown-item" id="cuisine-dropdown">                               
 
-                  </div>
-                </div>            
+                    </div>
+                  </div>  
+                </form>          
               </div>
+
             </div>
-          </div>
+            <!-- end of dropdown row -->
 
           </div>
+
+        </div>
+        <!-- end of big dropdown row -->
+        
 
         <!-- saved rest button -->
         <div class=row id="divSave">
@@ -222,7 +215,7 @@
                               <p id="restCuisine"class="card-text">cuisine type: {{restList[i][5]}}</p>
                               <p id="restInspection"class="card-text">inspection date: {{restList[i][6]}}</p>
                               <p id="restViolation"class="card-text">violation code: {{restList[i][8]}}</p>
-                              
+
                               <!-- save button -->
                               <a href="#" id="save{{numList[i]}}" class="btn btn-secondary">
                                 <svg id="star{{numList[i]}}" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
