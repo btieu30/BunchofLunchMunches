@@ -1,5 +1,4 @@
 import csv
-import sqlite3
 import database
 from datetime import date as dt
 
@@ -40,13 +39,11 @@ def parse():
     csvFile.close()
     db.close()
 
-if __name__ == "__main__":
-    parse()
 
-def searchResults(request: str):
+def parseSearchRequest(request: str):
     output=[]
     request = request.lower()
-    seps = [' in ', 'of grade', 'with a grade of', 'serving', ' food', 'restaurant'] #organize seps by order (borough)
+    seps = [' in ', 'of grade', 'or', 'with a grade of', 'serving', ' food', 'restaurant'] #organize seps by order (borough)
     sepMatched = False
     for sep in seps:
         if sep in request:
@@ -56,80 +53,30 @@ def searchResults(request: str):
             end = request[i+len(sep):].strip()
             break
     if sepMatched:
-        for pair in searchResults(begin):
-            output.append(pair)
-        for pair in searchResults(end):
-            output.append(pair)
+        if begin: # checks if empty
+            for pair in parseSearchRequest(begin):
+                output.append(pair)
+        if end: # checks if empty
+            for pair in parseSearchRequest(end):
+                output.append(pair)
         return output
     else:
-        matchArg(request)
-        return (("Name", request))
-            
-    
-def searchResultsOLD(searchRequest: str):
-    searchRequest = searchRequest.lower()
-    original = searchRequest
-
-    #separate seps into diffeerent levels (i.e. split by spaces AFTER we've exhausted all other options)
-    seps = [' in ', 'with a grade of', 'with', 'serving', 'food', 'restaurant'] #organize seps by order (borough)
-
-    #Brooklyn Pizza in Staten Island with a grade of A
-    #Japanese food in Brooklyn
-
-    arg = ""
-    matchArg(arg)[0] == "Name"
-
-    # filters = [0,0]
-    searchCriteria = []
-
-    for sep in seps: #take each sep
-        # 3 dropdowns: 1. borough, 1 grade, 1 cuisine.
-        filters = [x.strip() for x in searchRequest.split(sep)] #[Brooklyn Pizza, Staten Island with a grade of A]
-        for filter in filters:
-            if matchArg(filter) != None:
-                searchCriteria += matchArg(filter)
-                searchRequest = filters[1] #.replace(filters[0], "")
-
-    #pass the finished search criteria list to getRestaurants
-    database.Database.getRestaurants(searchCriteria)
-
- #[Brooklyn Pizza,Staten,Island with a grade of A]
-
-    #pass the finished list to getRestaurants
-    #database.Database.getRestaurants((("desc", "Pizza"), ("borough", "Queens")))
-
-    # for removeWord in seps:
-    #     searchRequest = searchRequest.replace(removeWord, '')
-    
-    # while "  " in searchRequest:
-    #     searchRequest.replace('  ', ' ')
-
-    # searchRequest.split(' ')
-    
-    # filters = []
-
-    # database.Database.getRestaurants(filters)
-
-# check if arg is specific to borough, cuisine, etc.
-def defineType(req):
-    
-
-    return "name"
-
-# TODO:
-# for check, use in
-
+        return (matchArg(request),) #dont remove the comma
+        
 def matchArg(argument: str) -> list:
     argument = argument.title()
     filters= {
+                "Grade": ['A', 'Z', 'B', 'C', 'N', 'P'],
                 "Borough": ["Brooklyn", "Manhattan", "Queens", "Staten Island", "Bronx"],
-                "Cuisine": ['Sandwiches/Salads/Mixed Buffet', 'Salads', 'Egyptian', 'Filipino', 'Seafood', 'Bakery Products/Desserts', 'New American', 'Pancakes/Waffles', 'German', 'Indonesian', 'Lebanese', 'Peruvian', 'Scandinavian', 'Hotdogs/Pretzels', 'Russian', 'Middle Eastern', 'Italian', 'Turkish', 'Caribbean', 'Greek', 'Donuts', 'Tex-Mex', 'African', 'American', 'Jewish/Kosher', 'Continental', 'Chinese/Cuban', 'Portuguese', 'Eastern European', 'Asian/Asian Fusion', 'Soups/Salads/Sandwiches', 'Bangladeshi', 'Tapas', 'Chicken', 'Basque', 'Chilean', 'Other', 'Pakistani', 'Mexican', 'Nuts/Confectionary', 'Spanish', 'Korean', 'Barbecue', 'Frozen Desserts', 'Australian', 'Soups', 'Polish', 'Sandwiches', 'Brazilian', 'Southwestern', 'Pizza', 'Southeast Asian', 'Creole', 'French', 'Fruits/Vegetables', 'Latin American', 'Ethiopian', 'Thai', 'Hotdogs', 'Creole/Cajun', 'Armenian', 'Chinese', 'Coffee/Tea', 'Vegetarian', 'Juice, Smoothies, Fruit Salads', 'Moroccan', 'Japanese', 'Hamburgers', 'Vegan', 'Irish', 'Czech', 'Fusion', 'Bottled Beverages', 'New French', 'Iranian', 'Chinese/Japanese', 'Californian', 'Steakhouse', 'English', 'Mediterranean', 'Afghan', 'Hawaiian', 'Indian', 'Soul Food', 'Cajun', 'Bagels/Pretzels'],
-                "Grade": ['A', 'Z', 'B', 'C', 'N', 'P']
+                "Cuisine": ['Sandwiches/Salads/Mixed Buffet', 'Salads', 'Egyptian', 'Filipino', 'Seafood', 'Bakery Products/Desserts', 'New American', 'Pancakes/Waffles', 'German', 'Indonesian', 'Lebanese', 'Peruvian', 'Scandinavian', 'Hotdogs/Pretzels', 'Russian', 'Middle Eastern', 'Italian', 'Turkish', 'Caribbean', 'Greek', 'Donuts', 'Tex-Mex', 'African', 'American', 'Jewish/Kosher', 'Continental', 'Chinese/Cuban', 'Portuguese', 'Eastern European', 'Asian/Asian Fusion', 'Soups/Salads/Sandwiches', 'Bangladeshi', 'Tapas', 'Chicken', 'Basque', 'Chilean', 'Other', 'Pakistani', 'Mexican', 'Nuts/Confectionary', 'Spanish', 'Korean', 'Barbecue', 'Frozen Desserts', 'Australian', 'Soups', 'Polish', 'Sandwiches', 'Brazilian', 'Southwestern', 'Pizza', 'Southeast Asian', 'Creole', 'French', 'Fruits/Vegetables', 'Latin American', 'Ethiopian', 'Thai', 'Hotdogs', 'Creole/Cajun', 'Armenian', 'Chinese', 'Coffee/Tea', 'Vegetarian', 'Juice, Smoothies, Fruit Salads', 'Moroccan', 'Japanese', 'Hamburgers', 'Vegan', 'Irish', 'Czech', 'Fusion', 'Bottled Beverages', 'New French', 'Iranian', 'Chinese/Japanese', 'Californian', 'Steakhouse', 'English', 'Mediterranean', 'Afghan', 'Hawaiian', 'Indian', 'Soul Food', 'Cajun', 'Bagels/Pretzels']
             }
     
     for filter in filters:
         for type in filters[filter]:
             if argument in type:
                 return (filter, argument)
-    return None
+    return ("Name", argument)
     
+if __name__ == "__main__":
+    # parse()
+    print(parseSearchRequest("Mcdonalds in brooklyn with a grade of b"))
