@@ -342,7 +342,7 @@ var displayFilter = function(e) {
 }
 
 var setStar = function(element) {
-    var restID = element.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute("data-id");
+    var restID = element.parentNode.parentNode.parentNode.getAttribute("data-id");
     var saveButton = element.querySelector("#saveButton");
     var unsaveButton = element.querySelector("#unsaveButton");
 
@@ -363,7 +363,7 @@ var setStar = function(element) {
 }
 
 var toggleStar = function() {
-    var restID = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute("data-id");
+    var restID = this.parentNode.parentNode.parentNode.getAttribute("data-id");
     var restData = [];
     for (const rest of restList) {
         if (rest[0] == restID) {
