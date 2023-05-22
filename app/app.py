@@ -10,11 +10,12 @@ def root():
     #restaurant name, grade, review | borough | building | street | zip code |  cuisine description | inspection date | violation code | 
     #(id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long)
     restaurants = "empty"
+    returntext = ""
     if request.method == "POST":
         restaurants=db.getRestaurants("name", "ASC", parseSearchRequest(request.form['query']))
-        print("yeahaahhahah")
+        returntext=request.form['query']
 
-    return render_template('home.html', restList=restaurants)
+    return render_template('home.html', restList=restaurants, returntext=returntext)
 
 @app.route("/saved", methods=['GET', 'POST'])
 def saved_page():

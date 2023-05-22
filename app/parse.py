@@ -43,7 +43,7 @@ def parse():
 def parseSearchRequest(request: str):
     output=[]
     request = request.lower()
-    seps = [' in ', 'of grade', 'or', 'with a grade of', 'serving', ' food', 'restaurants', 'restaurant']
+    seps = ['in the', ' in ', 'of grade', 'and', 'with a grade of', 'serving', ' food', ' eats', 'restaurants', 'restaurant']
     sepMatched = False
     for sep in seps:
         if sep in request:
