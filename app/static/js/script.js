@@ -46,7 +46,7 @@ function titleCase(str) {
     str = str.toLowerCase().split(' ');
     for (var i = 0; i < str.length; i++) {
         str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
-        if (str[i].charAt(0).toLowerCase() == str[i].charAt(0).toUpperCase()) {
+        if (str[i].charAt(0).toLowerCase() == str[i].charAt(0).toUpperCase() && isNaN(str[i].charAt(0))) {
             str[i]=str[i].charAt(0)+str[i].charAt(1).toUpperCase() + str[i].slice(2);
         }
     }
@@ -79,10 +79,11 @@ var initialize = function() {
             // Cancel the default action, if needed
             event.preventDefault();
             // Trigger the button element with a click
-            displayResults(restList);
+            document.getElementById("searchform").dispatchEvent(new Event("submit"));
         }
         });
-        searchButton.onclick = displayResultsHome;
+
+        if (restList!="empty") {displayResults();}
 
         populateFilter();
         //check checkbox for filter
@@ -92,7 +93,7 @@ var initialize = function() {
         restList = saveList;
 
         if (saveList.length != 0) {
-            displayResults(saveList);
+            displayResults();
         }
     }
     
@@ -157,10 +158,6 @@ var populateFilter = function() { //FIX
     }
 }
 
-var displayResultsHome = function(e) {
-    displayResults();
-}
-
 var displayResults = function() {
     displayResultsWithBounds(1, 5);
 }
@@ -190,7 +187,7 @@ var displayResultsWithBounds = function(start, end) {
 
 
 
-    pageDisp.innerHTML = "Displaying "+start+"-"+end+" (of "+restList.length+" results)";
+    pageDisp.innerHTML = "Displaying "+Math.min(start, end)+"-"+end+" (of "+restList.length+" results)";
 
     leftarrow.removeEventListener("click",decrement);
     rightarrow.removeEventListener("click",increment);

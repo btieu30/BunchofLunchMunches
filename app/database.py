@@ -16,7 +16,7 @@ class Database:
                 borough TEXT, \
                 address TEXT, \
                 zipCode TEXT, \
-                desc TEXT, \
+                cuisine TEXT, \
                 iDate INT, \
                 sDate TEXT, \
                 violation TEXT, \
@@ -27,10 +27,10 @@ class Database:
             )"
         )
 
-    def addRestaurant(self, id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long):
+    def addRestaurant(self, id, name, borough, address, zipCode, cuisine, iDate, sDate, violation, score, grade, lat, long):
         self.c.execute(
-            f"INSERT INTO restaurants (id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            (id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long)
+            f"INSERT INTO restaurants (id, name, borough, address, zipCode, cuisine, iDate, sDate, violation, score, grade, lat, long) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            (id, name, borough, address, zipCode, cuisine, iDate, sDate, violation, score, grade, lat, long)
         )
         self.commit()
         

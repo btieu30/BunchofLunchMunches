@@ -43,7 +43,7 @@ def parse():
 def parseSearchRequest(request: str):
     output=[]
     request = request.lower()
-    seps = [' in ', 'of grade', 'or', 'with a grade of', 'serving', ' food', 'restaurant'] #organize seps by order (borough)
+    seps = [' in ', 'of grade', 'or', 'with a grade of', 'serving', ' food', 'restaurants', 'restaurant']
     sepMatched = False
     for sep in seps:
         if sep in request:
@@ -78,5 +78,7 @@ def matchArg(argument: str) -> list:
     return ("Name", argument)
     
 if __name__ == "__main__":
-    # parse()
-    print(parseSearchRequest("Mcdonalds in brooklyn with a grade of b"))
+    parse()
+    # db = database.Database()
+    # print(parseSearchRequest("asian restaurants in queens"))
+    # print(db.getRestaurants("name", "ASC", parseSearchRequest("asian restaurants in queens")))
