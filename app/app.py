@@ -8,18 +8,10 @@ db = Database()
 def root():
     #restaurant name, grade, review | borough | building | street | zip code |  cuisine description | inspection date | violation code | 
     #(id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long)
-    # restaurants = db.getRestaurants()
-    # n=len(restaurants)
-    # if (n>10):
-    #     n = 10
-        
-    McDonalds = [99345, "McDonalds", "Brooklyn", "Address", "11234", "cuisine description", "Feb 3 2023", "sDate", "31",  "score", "A"]
-    Popeyes0 = [343645, "Popeyes", "Manhattan", "Address", "11342", "cuisine description", "Jan 7 2022", "sDate", "22", "score", "Z"]
-    Popeyes1 = [34523, "Popeyes", "Bronx", "Address", "11242", "cuisine description", "Sept 5 2022", "sDate", "15", "score", "B"]
-    restaurants = [McDonalds, Popeyes0, Popeyes1]
-    n=len(restaurants)
+    restaurants = db.getRestaurants()
 
-    return render_template('home.html', restList=restaurants, n = n)
+
+    return render_template('home.html', restList=restaurants)
 
 @app.route("/saved", methods=['GET', 'POST'])
 def saved_page():
@@ -41,4 +33,4 @@ def saved_page():
 
 if __name__ == "__main__":
     app.debug = True
-    app.run()
+    app.run(port=5001)
