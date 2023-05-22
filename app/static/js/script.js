@@ -11,10 +11,9 @@
 // });
 
 var expanded=true;
+var begin = 1;
+var restList;
 
-// restList, num of results, saveList
-var restList = document.getElementById("data0").innerHTML;
-restList = JSON.parse(restList);
 
 var saveList = [];
 
@@ -31,33 +30,35 @@ function titleCase(str) {
 
 var initialize = function() {
     // search button
-    var searchButton = document.getElementById("search-button");
-    if (searchButton) {
-        document.getElementById("search-input").addEventListener("keypress", function(event) {
-            // If the user presses the "Enter" key on the keyboard
-            if (event.key === "Enter") {
-              // Cancel the default action, if needed
-              event.preventDefault();
-              // Trigger the button element with a click
-              displayResults(restList); //FIX
-            }
-          });
-        searchButton.onclick = displayResultsHome;
-    }
-
     if (document.getElementById("home")) {
-        // populate results
-        // populateResults();
-        //populate filters
+        restList = document.getElementById("data0").innerHTML;
+        restList = JSON.parse(restList);
+
+        var searchButton = document.getElementById("search-button");
+        document.getElementById("search-input").addEventListener("keypress", function(event) {
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            displayResults(restList); //FIX
+        }
+        });
+        searchButton.onclick = displayResultsHome;
+
         populateFilter();
         //check checkbox for filter
         checkFilter();
     }
     else {
+        restList = saveList;
         if (saveList.length != 0) {
             displayResults(saveList);
         }
     }
+    
+
+    
 
     // go through results dropdowns to see if user clicks on them
     var map_parameters = { center: {lat: 40.731, lng: -73.935}, zoom: 10 };
@@ -68,14 +69,11 @@ var initialize = function() {
 
 
 var populateFilter = function() { //FIX
-    console.log("running populate()........");
     var filterList = [["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"],
                         ["A", "B", "C", "D", "F"],
                         ["type1", "type2", "type3", "type4","type5"]];
     var dropdownList = ["borough-dropdown", "grade-dropdown", "cuisine-dropdown"];
 
-    console.log("**************dropdownlist"+dropdownList);
-    console.log(filterList.length);
 
     for (let i=0; i<filterList.length; i++) {
         // get dropdown
@@ -87,7 +85,6 @@ var populateFilter = function() { //FIX
 
             // add checklist to dropdown
             mainDropdown.appendChild(newCheck);
-            console.log("***********maindropdown"+mainDropdown);
             // <div class="form-check">
             //     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
             //     <label class="form-check-label" for="flexRadioDefault1">
@@ -122,22 +119,50 @@ var populateFilter = function() { //FIX
 }
 
 var displayResultsHome = function(e) {
-    displayResults(restList);
+    displayResults();
+}
+
+var displayResults = function() {
+    displayResultsWithBounds(1, 5);
+}
+
+var decrement = function() {
+    begin=begin-5;
+    displayResultsWithBounds(begin, begin+4);
+}
+
+var increment = function() {
+    begin = begin+5;
+    displayResultsWithBounds(begin, begin+4);
 }
 
 // clicking search button
-var displayResults = function(restList) {
+var displayResultsWithBounds = function(start, end) {
+    end = Math.min(end, restList.length);
     // get results element (col)
     var results = document.getElementById("results");
     // display results
-    results.style.display = "inline";
+    results.parentNode.style.display = "inline";
     results.innerHTML = "";
 
     var accordion = document.createElement("div");
     results.appendChild(accordion);
     accordion.setAttribute("class", "accordion");
 
-    for (var i=0; i<Math.min(5, restList.length); i++) {
+
+
+    pageDisp.innerHTML = "Displaying "+start+"-"+end+" (of "+restList.length+" results)";
+
+    leftarrow.removeEventListener("click",decrement);
+    rightarrow.removeEventListener("click",increment);
+    if (start>1) {
+        leftarrow.addEventListener("click", decrement);
+    }
+    if (end < restList.length) {
+        rightarrow.addEventListener("click", increment);
+    }
+
+    for (var i=start-1; i<end; i++) {
 
         var accordionItem = document.createElement("div");
         accordion.appendChild(accordionItem);
@@ -258,6 +283,12 @@ var displayResults = function(restList) {
         path2.setAttribute("d", "M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z");
     
         setStar(saveButtons);
+    }
+    if (accordion.innerHTML == "") {
+        var error = document.createElement("h3");
+        error.style.textAlign="center";
+        error.innerHTML = "No results were found.";
+        accordion.appendChild(error);
     }
 }
 
