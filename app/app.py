@@ -17,18 +17,9 @@ def root():
 def saved_page():
     # restaurant name, grade, review | borough | building | street | zip code |  cuisine description | inspection date | violation code | 
     restaurants = db.getRestaurants()
-    # n=len(restaurants)
-    # if (n>10):
-    #     n = 10
 
-    McDonalds = [99345, "McDonalds", "Brooklyn", "Address", "11234", "cuisine description", "Feb 3 2023", "sDate", "31",  "score", "A"]
-    Popeyes0 = [343645, "Popeyes", "Manhattan", "Address", "11342", "cuisine description", "Jan 7 2022", "sDate", "22", "score", "Z"]
-    Popeyes1 = [34523, "Popeyes", "Bronx", "Address", "11242", "cuisine description", "Sept 5 2022", "sDate", "15", "score", "B"]
-    restaurants = [McDonalds, Popeyes0, Popeyes1]
-    n=len(restaurants)
 
-    return render_template('saved.html', restList=restaurants, n=n)
-    # n is the number of restaurants returned
+    return render_template('saved.html', restList=restaurants)
 
 
 if __name__ == "__main__":

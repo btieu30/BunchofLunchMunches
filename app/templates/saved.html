@@ -39,7 +39,7 @@
 
   <body>
     <div id="data0" style="display:none;">{{restList|tojson}}</div>
-    <div id="data1" style="display:none;">{{n}}</div>
+
     
     <!-- nav bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -79,7 +79,17 @@
         <!-- separate row for results + map -->
         <div class="row">
 
-          <div id="results" class="col">
+          <div class="col">
+
+            <div class="row">
+              <div style="display: grid; grid-template-columns: 8fr 1fr 1fr; grid-auto-flow: row;">
+                <p id="pageDisp" style="padding: 4px;"></p>
+                <div id='leftarrow' style="padding: 4px; text-align: center; cursor: pointer; user-select: none;"> ← </div>
+                <div id='rightarrow' style="padding: 4px; text-align: center; cursor: pointer; user-select: none;"> → </div>
+              </div>
+            </div>
+
+            <div id="results" class="col"></div>
 
           </div>
           <!-- end of 1st col (results) -->

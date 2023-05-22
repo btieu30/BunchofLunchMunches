@@ -17,22 +17,60 @@ var restList;
 
 var saveList = [];
 
+
+function setCookie(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return "";
+}
+function eraseCookie(name) {   
+    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+
 function titleCase(str) {
     str = str.toLowerCase().split(' ');
     for (var i = 0; i < str.length; i++) {
         str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
-        if (str[i].charAt(0) == "\"") {
-            str[i]='"'+str[i].charAt(1).toUpperCase() + str[i].slice(2);
+        if (str[i].charAt(0).toLowerCase() == str[i].charAt(0).toUpperCase()) {
+            str[i]=str[i].charAt(0)+str[i].charAt(1).toUpperCase() + str[i].slice(2);
         }
     }
     return str.join(' ');
 }
 
 var initialize = function() {
+    var dbList = document.getElementById("data0").innerHTML;
+    dbList = JSON.parse(dbList);
+
+
+    var savedIDs=getCookie("savedIDs").split(",");
+    for (const id of savedIDs) {
+        for (const rest of dbList) {
+            if (rest[0] == id) {
+                saveList.push(rest);
+            }
+        }
+    }
+
+
     // search button
     if (document.getElementById("home")) {
-        restList = document.getElementById("data0").innerHTML;
-        restList = JSON.parse(restList);
+        restList = dbList;
 
         var searchButton = document.getElementById("search-button");
         document.getElementById("search-input").addEventListener("keypress", function(event) {
@@ -41,7 +79,7 @@ var initialize = function() {
             // Cancel the default action, if needed
             event.preventDefault();
             // Trigger the button element with a click
-            displayResults(restList); //FIX
+            displayResults(restList);
         }
         });
         searchButton.onclick = displayResultsHome;
@@ -52,6 +90,7 @@ var initialize = function() {
     }
     else {
         restList = saveList;
+
         if (saveList.length != 0) {
             displayResults(saveList);
         }
@@ -378,6 +417,11 @@ var toggleStar = function() {
     else {
         saveList.splice(index,1);
     }
+    var savedIDs = [];
+    for (const save of saveList) {
+        savedIDs.push(save[0]);
+    }
+    setCookie("savedIDs", savedIDs, 7);
     setStar(this);
 }
 
