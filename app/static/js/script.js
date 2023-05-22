@@ -109,51 +109,32 @@ var initialize = function() {
 
 
 var populateFilter = function() { //FIX
-    var filterList = [["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"],
-                        ["A", "B", "C", "D", "F"],
-                        ["type1", "type2", "type3", "type4","type5"]];
+    var filterList = [["Borough (deselect)", "Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"],
+                        ["Grade (deselect)", "A", "B", "C", "D", "F"],
+                        ['Cuisine (deselect)', 'Sandwiches/Salads/Mixed Buffet', 'Salads', 'Egyptian', 'Filipino', 'Seafood', 'Bakery Products/Desserts', 'New American', 'Pancakes/Waffles', 'German', 'Indonesian', 'Lebanese', 'Peruvian', 'Scandinavian', 'Hotdogs/Pretzels', 'Russian', 'Middle Eastern', 'Italian', 'Turkish', 'Caribbean', 'Greek', 'Donuts', 'Tex-Mex', 'African', 'American', 'Jewish/Kosher', 'Continental', 'Chinese/Cuban', 'Portuguese', 'Eastern European', 'Asian/Asian Fusion', 'Soups/Salads/Sandwiches', 'Bangladeshi', 'Tapas', 'Chicken', 'Basque', 'Chilean', 'Other', 'Pakistani', 'Mexican', 'Nuts/Confectionary', 'Spanish', 'Korean', 'Barbecue', 'Frozen Desserts', 'Australian', 'Soups', 'Polish', 'Sandwiches', 'Brazilian', 'Southwestern', 'Pizza', 'Southeast Asian', 'Creole', 'French', 'Fruits/Vegetables', 'Latin American', 'Ethiopian', 'Thai', 'Hotdogs', 'Creole/Cajun', 'Armenian', 'Chinese', 'Coffee/Tea', 'Vegetarian', 'Juice, Smoothies, Fruit Salads', 'Moroccan', 'Japanese', 'Hamburgers', 'Vegan', 'Irish', 'Czech', 'Fusion', 'Bottled Beverages', 'New French', 'Iranian', 'Chinese/Japanese', 'Californian', 'Steakhouse', 'English', 'Mediterranean', 'Afghan', 'Hawaiian', 'Indian', 'Soul Food', 'Cajun', 'Bagels/Pretzels']
+                     ];
     var dropdownList = ["borough-dropdown", "grade-dropdown", "cuisine-dropdown"];
 
-
-    for (let i=0; i<filterList.length; i++) {
+    for (let i=0; i<dropdownList.length; i++) {
         // get dropdown
         var mainDropdown = document.getElementById(dropdownList[i]);
 
         for (let j=0; j<filterList[i].length; j++) {
-            var newCheck = document.createElement("div");
-            newCheck.className = "form-check";
+            var newItem = document.createElement("div");
+            newItem.setAttribute("class","dropdown-item");
+            newItem.innerHTML = filterList[i][j];
 
             // add checklist to dropdown
-            mainDropdown.appendChild(newCheck);
-            // <div class="form-check">
-            //     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            //     <label class="form-check-label" for="flexRadioDefault1">
-            //       Default radio
-            //     </label>
-            //   </div>
-            //   <div class="form-check">
-            //     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-            //     <label class="form-check-label" for="flexRadioDefault2">
-            //       Default checked radio
-            //     </label>
-            //   </div>
+            mainDropdown.appendChild(newItem);
 
-            newCheck.setAttribute("id", filterList[i][j]);
+            newItem.onclick = (e) => {
+                console.log(e.currentTarget.parentElement.parentElement);
 
-            var newInput = document.createElement("input");
-            newInput.setAttribute("class", "form-check-input");
-            newInput.setAttribute("type", "radio");
-            newInput.setAttribute("id", "flexRadioDefault"+(j+1)*(i+1));
-            newInput.setAttribute("name", "flexRadioDefault");
+                e.currentTarget.parentElement.parentElement.querySelector("#filter").innerHTML = e.currentTarget.innerHTML.replace("(deselect)", "");
+            }
 
-            var newLabel = document.createElement("label");
-            newLabel.setAttribute("class", "form-check-label");
-            newLabel.setAttribute("for", "flexRadioDefault"+(j+1)*(i+1));
+            // newCheck.setAttribute("id", filterList[i][j]);
 
-            newCheck.appendChild(newInput);
-            newCheck.appendChild(newLabel);
-
-            newLabel.innerHTML = filterList[i][j];
         }
     }
 }
