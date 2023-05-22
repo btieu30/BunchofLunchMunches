@@ -243,3 +243,18 @@ vivianT -- 2023-05-21 2:14
 * Finished save.html's displaying restaurants using js
 * Need to figure out a way to save saveList's data without it clearing every time we switch between pages bc js variable don't stay
 ==============================================================
+
+vivianT -- 2023-05-21 22:30
+--------------------------------------------------------------
+* Helped anthonyS parse through and re-organize JS code, much more streamlined and makes sense, mostly anthonyS
+==============================================================
+
+anthonyS -- 2023-05-22 3:00
+--------------------------------------------------------------
+* Worked with vivianT to completely get rid of numList and redo the JS functions so that they don't rely on numList, heavy remodeling
+* Added cookies so the saveList is stored between pages
+* Added fuzzy search
+* Added page numbers, flipping around through the results
+* Self-entered queries in the search bar generates correct listings/results
+* Maintain submitted text in search bar, added more natural language to…
+==============================================================
