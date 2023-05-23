@@ -102,13 +102,56 @@ var initialize = function() {
     }
 }
 
+var updateQuery = function() {
+    var filters = document.getElementsByClassName("filterdrop");
+    var seed = {};
+    for (const filter of filters) {
+        var labelContent = filter.querySelector("#filter").innerHTML.toLowerCase();
+        var labelType = filter.children[1].id.replace("-dropdown","");
+        seed[labelType]=labelContent.trim();
+    }
+    var s = "restaurant";
+    for (let key in seed) {
+        if (key != seed[key]) {
+            if (key=="cuisine") {
+                s = seed[key]+ " " + s;
+            }
+            if (key=="borough") {
+                s = s+ " in " + seed[key];
+            }
+            if (key=="grade") {
+                s = s + " with a grade of "+seed[key];
+            }
+            if (key=="sort" || key=="order") {
+                s = s+ " (";
+                var g = "";
+                if (key=="sort") {
+                    g = g+"sorted by "+seed[key];
+                }
+                if (key=="order") {
+                    g = g+"in "+seed[key]+" order";
+                }
+                s = s + g.trim();
+                s = s+ ")";
+            }
+        }
+    }
+    s=s.replace(") ("," ");
+    if (s=="restaurant") {
+        s=""
+    }
+    document.getElementById("search-input").value = s;
+}
+
 
 var populateFilter = function() { //FIX
     var filterList = [["Borough (deselect)", "Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"],
+                        ['Cuisine (deselect)', 'Sandwiches/Salads/Mixed Buffet', 'Salads', 'Egyptian', 'Filipino', 'Seafood', 'Bakery Products/Desserts', 'New American', 'Pancakes/Waffles', 'German', 'Indonesian', 'Lebanese', 'Peruvian', 'Scandinavian', 'Hotdogs/Pretzels', 'Russian', 'Middle Eastern', 'Italian', 'Turkish', 'Caribbean', 'Greek', 'Donuts', 'Tex-Mex', 'African', 'American', 'Jewish/Kosher', 'Continental', 'Chinese/Cuban', 'Portuguese', 'Eastern European', 'Asian/Asian Fusion', 'Soups/Salads/Sandwiches', 'Bangladeshi', 'Tapas', 'Chicken', 'Basque', 'Chilean', 'Other', 'Pakistani', 'Mexican', 'Nuts/Confectionary', 'Spanish', 'Korean', 'Barbecue', 'Frozen Desserts', 'Australian', 'Soups', 'Polish', 'Sandwiches', 'Brazilian', 'Southwestern', 'Pizza', 'Southeast Asian', 'Creole', 'French', 'Fruits/Vegetables', 'Latin American', 'Ethiopian', 'Thai', 'Hotdogs', 'Creole/Cajun', 'Armenian', 'Chinese', 'Coffee/Tea', 'Vegetarian', 'Juice, Smoothies, Fruit Salads', 'Moroccan', 'Japanese', 'Hamburgers', 'Vegan', 'Irish', 'Czech', 'Fusion', 'Bottled Beverages', 'New French', 'Iranian', 'Chinese/Japanese', 'Californian', 'Steakhouse', 'English', 'Mediterranean', 'Afghan', 'Hawaiian', 'Indian', 'Soul Food', 'Cajun', 'Bagels/Pretzels'],
                         ["Grade (deselect)", "A", "B", "C", "D", "F"],
-                        ['Cuisine (deselect)', 'Sandwiches/Salads/Mixed Buffet', 'Salads', 'Egyptian', 'Filipino', 'Seafood', 'Bakery Products/Desserts', 'New American', 'Pancakes/Waffles', 'German', 'Indonesian', 'Lebanese', 'Peruvian', 'Scandinavian', 'Hotdogs/Pretzels', 'Russian', 'Middle Eastern', 'Italian', 'Turkish', 'Caribbean', 'Greek', 'Donuts', 'Tex-Mex', 'African', 'American', 'Jewish/Kosher', 'Continental', 'Chinese/Cuban', 'Portuguese', 'Eastern European', 'Asian/Asian Fusion', 'Soups/Salads/Sandwiches', 'Bangladeshi', 'Tapas', 'Chicken', 'Basque', 'Chilean', 'Other', 'Pakistani', 'Mexican', 'Nuts/Confectionary', 'Spanish', 'Korean', 'Barbecue', 'Frozen Desserts', 'Australian', 'Soups', 'Polish', 'Sandwiches', 'Brazilian', 'Southwestern', 'Pizza', 'Southeast Asian', 'Creole', 'French', 'Fruits/Vegetables', 'Latin American', 'Ethiopian', 'Thai', 'Hotdogs', 'Creole/Cajun', 'Armenian', 'Chinese', 'Coffee/Tea', 'Vegetarian', 'Juice, Smoothies, Fruit Salads', 'Moroccan', 'Japanese', 'Hamburgers', 'Vegan', 'Irish', 'Czech', 'Fusion', 'Bottled Beverages', 'New French', 'Iranian', 'Chinese/Japanese', 'Californian', 'Steakhouse', 'English', 'Mediterranean', 'Afghan', 'Hawaiian', 'Indian', 'Soul Food', 'Cajun', 'Bagels/Pretzels']
+                        ['Sort (deselect)', 'Name', 'Grade', 'Date', 'Cuisine', 'Borough'],
+                        ['Order (deselect)', 'Ascending', 'Descending']
                      ];
-    var dropdownList = ["borough-dropdown", "grade-dropdown", "cuisine-dropdown"];
+    var dropdownList = ["borough-dropdown", "cuisine-dropdown", "grade-dropdown" ,"sort-dropdown", "order-dropdown"];
 
     for (let i=0; i<dropdownList.length; i++) {
         // get dropdown
@@ -123,9 +166,8 @@ var populateFilter = function() { //FIX
             mainDropdown.appendChild(newItem);
 
             newItem.onclick = (e) => {
-                console.log(e.currentTarget.parentElement.parentElement);
-
                 e.currentTarget.parentElement.parentElement.querySelector("#filter").innerHTML = e.currentTarget.innerHTML.replace("(deselect)", "");
+                updateQuery();
             }
 
             // newCheck.setAttribute("id", filterList[i][j]);
@@ -297,25 +339,7 @@ var displayResultsWithBounds = function(start, end) {
     
         setStar(saveButtons);
 
-        //creating pins per result
-        pins[i] = new google.maps.Marker ({
-            position: {lat: restList[i][11], lng: restList[i][12]},
-            map: map,
-            title: restList[i][1]
-        });
-        pins[i].index = i;
-        info[i] = new google.maps.InfoWindow ();
-        info[i].setContent ('<h6>' + restList[i][1] + '</h6> Grade: ' + restList[i][10]);
-        //zoom in when a specific pin is clicked and open info window
-        google.maps.event.addListener (pins[i], 'click', function(){
-            info[this.index].open(map,pins[this.index]);
-            map.panTo(pins[this.index].getPosition());
-            map.setZoom(15);
-        });
-        //zoom out when the window is closed
-        google.maps.event.addListener (info[i], 'closeclick', function() {
-            map.setZoom(10);
-        });
+        createPins(i, restList);
     }
     if (accordion.innerHTML == "") {
         var error = document.createElement("h3");
@@ -323,6 +347,45 @@ var displayResultsWithBounds = function(start, end) {
         error.innerHTML = "No results were found.";
         accordion.appendChild(error);
     }
+}
+
+var createPins = function(i, restList) {
+    //creating pins per result
+    pins[i] = new google.maps.Marker ({
+        position: {lat: restList[i][11], lng: restList[i][12]},
+        map: map,
+        title: restList[i][1]
+    });
+    pins[i].index = i;
+    info[i] = new google.maps.InfoWindow ();
+    info[i].setContent ('<h6>' + restList[i][1] + '</h6> Grade: ' + restList[i][10]);
+    //zoom in when a specific pin is clicked and open info window
+    google.maps.event.addListener (pins[i], 'click', function(){
+        info[this.index].open(map,pins[this.index]);
+        map.panTo(pins[this.index].getPosition());
+        map.setZoom(15);
+    });
+    //zoom out when the window is closed
+    google.maps.event.addListener (info[i], 'closeclick', function() {
+        map.setZoom(10);
+    });
+}
+
+var showPins = function() {
+    for (let i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+    }
+}
+
+var hidePins = function() {
+    for (let i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+    }
+}
+
+var deletePins = function() {
+    pins = [];
+    info = [];
 }
 
 var toggle = function(e) {

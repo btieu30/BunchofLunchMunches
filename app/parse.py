@@ -44,7 +44,7 @@ def parseSearchRequest(request: str):
     parts = request.split("(")
     seps = ['in the', ' in ', 'of grade', 'and', 'with a grade of', 'serving', ' food', ' eats', 'restaurants', 'restaurant']
     filters = getFilters(parts[0], seps)
-    sorts = (("Order","asc"), ("SortType","name"))
+    sorts = (("SortType","name"), ("Order","asc"))
     if len(parts) > 1:
         parts[1]=parts[1].replace("ascending","asc").replace("descending","desc").replace(")","")
         seps = ["sorted by", "sort by", " in ", "order"]
