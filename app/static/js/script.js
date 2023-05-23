@@ -183,12 +183,18 @@ var displayResults = function() {
 
 var decrement = function() {
     begin=begin-5;
+    hidePins();
+    deletePins();
     displayResultsWithBounds(begin, begin+4);
+
 }
 
 var increment = function() {
     begin = begin+5;
+    hidePins();
+    deletePins();
     displayResultsWithBounds(begin, begin+4);
+
 }
 
 // clicking search button
@@ -357,6 +363,7 @@ var createPins = function(i, restList) {
         title: restList[i][1]
     });
     pins[i].index = i;
+    pins[i].restid = restList[i][0];
     info[i] = new google.maps.InfoWindow ();
     info[i].setContent ('<h6>' + restList[i][1] + '</h6> Grade: ' + restList[i][10]);
     //zoom in when a specific pin is clicked and open info window
@@ -372,20 +379,32 @@ var createPins = function(i, restList) {
 }
 
 var showPins = function() {
-    for (let i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
+    for (let i = 0; i < pins.length; i++) {
+        pins[i].setMap(map);
     }
 }
 
 var hidePins = function() {
-    for (let i = 0; i < markers.length; i++) {
-        markers[i].setMap(null);
+    for (let i = 0; i < pins.length; i++) {
+        pins[i].setMap(null);
+    }
+}
+
+var hidePinsExcept = function(id) {
+    for (let i = 0; i < pins.length; i++) {
+        if (pins[i].restid != id) {
+            pins[i].setMap(null);
+        }
     }
 }
 
 var deletePins = function() {
-    pins = [];
-    info = [];
+    for (var i in pins) {
+        pins[i] = null;
+    }
+    for (var i in info) {
+        info[i] = null;
+    }
 }
 
 var toggle = function(e) {
@@ -398,6 +417,8 @@ var toggle = function(e) {
         }
         this.style.display="flex";
         interior.setAttribute("class", "accordion-collapse show");
+
+        hidePinsExcept(this.parentElement.getAttribute("data-id"));
     }
     else {
         for (var button of buttons) {
@@ -406,6 +427,7 @@ var toggle = function(e) {
                 button.setAttribute("aria-expanded", "false");
             }
         }
+        showPins();
         interior.setAttribute("class", "accordion-collapse collapse");
 
         // clearPin();
