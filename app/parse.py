@@ -82,3 +82,36 @@ if __name__ == "__main__":
     # db = database.Database()
     # print(parseSearchRequest("asian restaurants in queens"))
     # print(db.getRestaurants("name", "ASC", parseSearchRequest("asian restaurants in queens")))
+
+def getSortAndDirection(request: str):
+    sorters = {
+        "sortBy": ['name', 'grade'],
+        "order": ['ascending', 'descending']
+    }
+    request = request.lower
+    parts = request.split('(')
+    output = []
+
+    for part in parts[1:]:
+        if ')' in part:
+            appendOutput = part.split(')')[0]
+
+    seps = ['sorted by ', ' in ', 'order']
+    for sep in seps:
+        if sep in seps:
+            if sep in appendOutput:
+                output = appendOutput.split(sep)
+                
+      
+    #for sorter in sorters:
+    #    for type in sorters[sorter]:
+    #        for part in output:
+    #            if part in type:
+    #                return output
+    
+    return output
+
+    #1. Take returns from parseSearchRequest
+    #2. Sort the results as specified by the parentheses
+
+#Asian Brooklyn in resturants (sorted by name in ascending order)
