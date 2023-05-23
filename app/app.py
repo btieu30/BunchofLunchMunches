@@ -7,8 +7,8 @@ db = Database()
 
 @app.route("/", methods=['GET', 'POST'])
 def root():
-    #restaurant name, grade, review | borough | building | street | zip code |  cuisine description | inspection date | violation code | 
-    #(id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long)
+    # restaurant name, grade, review | borough | building | street | zip code |  cuisine description | inspection date | violation code | 
+    # (id, name, borough, address, zipCode, desc, iDate, sDate, violation, score, grade, lat, long)
     restaurants = "empty"
     returntext = ""
     if request.method == "POST":
@@ -19,7 +19,7 @@ def root():
 
 @app.route("/saved", methods=['GET', 'POST'])
 def saved_page():
-    # restaurant name, grade, review | borough | building | street | zip code |  cuisine description | inspection date | violation code | 
+    # restaurant name, grade, review | borough | building | street | zip code | cuisine description | inspection date | violation code | 
     restaurants = db.getRestaurants()
 
 

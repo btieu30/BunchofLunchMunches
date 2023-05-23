@@ -13,10 +13,11 @@
 var expanded=true;
 var begin = 1;
 var restList;
-
+var map;
 
 var saveList = [];
-
+var pins = [];
+var info = [];
 
 function setCookie(name,value,days) {
     var expires = "";
@@ -54,6 +55,9 @@ function titleCase(str) {
 }
 
 var initialize = function() {
+    var map_parameters = { center: {lat: 40.731, lng: -73.935}, zoom: 10 };
+    map = new google.maps.Map(document.getElementById('map'), map_parameters);
+
     var dbList = document.getElementById("data0").innerHTML;
     dbList = JSON.parse(dbList);
 
@@ -96,15 +100,6 @@ var initialize = function() {
             displayResults();
         }
     }
-    
-
-    
-
-    // go through results dropdowns to see if user clicks on them
-    var map_parameters = { center: {lat: 40.731, lng: -73.935}, zoom: 10 };
-    map = new google.maps.Map(document.getElementById('map'), map_parameters);
-
-    // google.maps.event.addDomListener(window, 'load', initialize);
 }
 
 
@@ -141,6 +136,7 @@ var populateFilter = function() { //FIX
 
 var displayResults = function() {
     displayResultsWithBounds(1, 5);
+//    addPin(1,5);
 }
 
 var decrement = function() {
@@ -300,6 +296,26 @@ var displayResultsWithBounds = function(start, end) {
         path2.setAttribute("d", "M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z");
     
         setStar(saveButtons);
+
+        //creating pins per result
+        pins[i] = new google.maps.Marker ({
+            position: {lat: restList[i][11], lng: restList[i][12]},
+            map: map,
+            title: restList[i][1]
+        });
+        pins[i].index = i;
+        info[i] = new google.maps.InfoWindow ();
+        info[i].setContent ('<h6>' + restList[i][1] + '</h6> Grade: ' + restList[i][10]);
+        //zoom in when a specific pin is clicked and open info window
+        google.maps.event.addListener (pins[i], 'click', function(){
+            info[this.index].open(map,pins[this.index]);
+            map.panTo(pins[this.index].getPosition());
+            map.setZoom(15);
+        });
+        //zoom out when the window is closed
+        google.maps.event.addListener (info[i], 'closeclick', function() {
+            map.setZoom(10);
+        });
     }
     if (accordion.innerHTML == "") {
         var error = document.createElement("h3");
@@ -402,35 +418,5 @@ var toggleStar = function() {
     setCookie("savedIDs", savedIDs, 7);
     setStar(this);
 }
-
-// function addPin() {
-//     var name = document.getElementById("restTitle").innerHTML;
-//     var grade = document.getElementById("restGrade").innerHTML;
-//     var pin = new google.maps.Marker ({
-//         //replace with selected restaurant's lat and long
-//         position:{lat: 40.777, lng: -73.955},
-//         map: map,
-//         title: name,
-//     });
-//     var window = new google.maps.InfoWindow ({
-//         content: grade //grade
-//       });
-//       markersArray.push(pin);
-//       //google.maps.event.addListener(pin)
-//     google.maps.event.addListener(pin, 'click', function() {
-//         console.log("HELPEPPEPEP");
-//         window.open(map, pin)
-//       });
-//       google.maps.event.addListener(map, 'click', function() {
-//         window.close()
-//       });
-// }
-
-// function clearPin() {
-//     for (var i = 0; i < markersArray.length; i++ ) {
-//         markersArray[i].setMap(null);
-//     }
-//     markersArray.length = 0;
-// }
 
 initialize();
