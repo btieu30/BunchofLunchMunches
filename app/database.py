@@ -39,10 +39,12 @@ class Database:
 
     #One sorttype for now
     #Two ways to sort: ASC or DSC
-    def getRestaurants(self, sortType="name", order="ASC", filters = []) -> list: #just make sortType = name by default and order = ASC on website
-        cond = "true" if len(filters)==0 else " AND ".join([f"replace({filter_[0]},\"\'\",\"\") LIKE '%{filter_[1]}%'" for filter_ in filters])
+    def getRestaurants(self, filters = [[],[("SortType","name"), ("Order", "ASC")]]) -> list: #just make sortType = name by default and order = ASC on website
+        cond = "true" if len(filters[0])==0 else " AND ".join([f"replace({filter_[0]},\"\'\",\"\") LIKE '%{filter_[1].strip()}%'" for filter_ in filters[0]])
+
+        print(f"SELECT * FROM restaurants WHERE {cond} ORDER BY {filters[1][0][1].lower()} {filters[1][1][1].lower()}")
         self.c.execute(
-            f"SELECT * FROM restaurants WHERE {cond} ORDER BY {sortType} {order}"
+            f"SELECT * FROM restaurants WHERE {cond} ORDER BY {filters[1][0][1].lower()} {filters[1][1][1].lower()}"
         )
         return self.c.fetchall()
 
@@ -51,4 +53,3 @@ class Database:
 
 if __name__=="__main__":
     db = Database()
-    print(db.getRestaurants("name","ASC",(("desc", "Pizza"), ("borough", "Queens"))))

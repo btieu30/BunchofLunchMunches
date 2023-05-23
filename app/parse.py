@@ -41,9 +41,29 @@ def parse():
 
 
 def parseSearchRequest(request: str):
+    parts = request.split("(")
+    seps = ['in the', ' in ', 'of grade', 'and', 'with a grade of', 'serving', ' food', ' eats', 'restaurants', 'restaurant']
+    filters = getFilters(parts[0], seps)
+    sorts = (("Order","asc"), ("SortType","name"))
+    if len(parts) > 1:
+        parts[1]=parts[1].replace("ascending","asc").replace("descending","desc").replace(")","")
+        seps = ["sorted by", "sort by", " in ", "order"]
+        sorts = getFilters(parts[1], seps)
+        if len(sorts) == 0:
+            return (("Order","asc"), ("SortType","name"))
+        if len(sorts) == 1:
+            if sorts[0][0]=="Order":
+                sorts = [("SortType","name"),sorts[0]]
+
+            else:
+                sorts.append(("Order","asc"))
+                print(sorts)
+
+    return (filters, sorts)
+
+def getFilters(request: str, seps):
     output=[]
     request = request.lower()
-    seps = ['in the', ' in ', 'of grade', 'and', 'with a grade of', 'serving', ' food', ' eats', 'restaurants', 'restaurant']
     sepMatched = False
     for sep in seps:
         if sep in request:
@@ -54,10 +74,10 @@ def parseSearchRequest(request: str):
             break
     if sepMatched:
         if begin: # checks if empty
-            for pair in parseSearchRequest(begin):
+            for pair in getFilters(begin, seps):
                 output.append(pair)
         if end: # checks if empty
-            for pair in parseSearchRequest(end):
+            for pair in getFilters(end, seps):
                 output.append(pair)
         return output
     else:
@@ -68,17 +88,18 @@ def matchArg(argument: str) -> list:
     filters= {
                 "Grade": ['A', 'Z', 'B', 'C', 'N', 'P'],
                 "Borough": ["Brooklyn", "Manhattan", "Queens", "Staten Island", "Bronx"],
-                "Cuisine": ['Sandwiches/Salads/Mixed Buffet', 'Salads', 'Egyptian', 'Filipino', 'Seafood', 'Bakery Products/Desserts', 'New American', 'Pancakes/Waffles', 'German', 'Indonesian', 'Lebanese', 'Peruvian', 'Scandinavian', 'Hotdogs/Pretzels', 'Russian', 'Middle Eastern', 'Italian', 'Turkish', 'Caribbean', 'Greek', 'Donuts', 'Tex-Mex', 'African', 'American', 'Jewish/Kosher', 'Continental', 'Chinese/Cuban', 'Portuguese', 'Eastern European', 'Asian/Asian Fusion', 'Soups/Salads/Sandwiches', 'Bangladeshi', 'Tapas', 'Chicken', 'Basque', 'Chilean', 'Other', 'Pakistani', 'Mexican', 'Nuts/Confectionary', 'Spanish', 'Korean', 'Barbecue', 'Frozen Desserts', 'Australian', 'Soups', 'Polish', 'Sandwiches', 'Brazilian', 'Southwestern', 'Pizza', 'Southeast Asian', 'Creole', 'French', 'Fruits/Vegetables', 'Latin American', 'Ethiopian', 'Thai', 'Hotdogs', 'Creole/Cajun', 'Armenian', 'Chinese', 'Coffee/Tea', 'Vegetarian', 'Juice, Smoothies, Fruit Salads', 'Moroccan', 'Japanese', 'Hamburgers', 'Vegan', 'Irish', 'Czech', 'Fusion', 'Bottled Beverages', 'New French', 'Iranian', 'Chinese/Japanese', 'Californian', 'Steakhouse', 'English', 'Mediterranean', 'Afghan', 'Hawaiian', 'Indian', 'Soul Food', 'Cajun', 'Bagels/Pretzels']
+                "Cuisine": ['Sandwiches/Salads/Mixed Buffet', 'Salads', 'Egyptian', 'Filipino', 'Seafood', 'Bakery Products/Desserts', 'New American', 'Pancakes/Waffles', 'German', 'Indonesian', 'Lebanese', 'Peruvian', 'Scandinavian', 'Hotdogs/Pretzels', 'Russian', 'Middle Eastern', 'Italian', 'Turkish', 'Caribbean', 'Greek', 'Donuts', 'Tex-Mex', 'African', 'American', 'Jewish/Kosher', 'Continental', 'Chinese/Cuban', 'Portuguese', 'Eastern European', 'Asian/Asian Fusion', 'Soups/Salads/Sandwiches', 'Bangladeshi', 'Tapas', 'Chicken', 'Basque', 'Chilean', 'Other', 'Pakistani', 'Mexican', 'Nuts/Confectionary', 'Spanish', 'Korean', 'Barbecue', 'Frozen Desserts', 'Australian', 'Soups', 'Polish', 'Sandwiches', 'Brazilian', 'Southwestern', 'Pizza', 'Southeast Asian', 'Creole', 'French', 'Fruits/Vegetables', 'Latin American', 'Ethiopian', 'Thai', 'Hotdogs', 'Creole/Cajun', 'Armenian', 'Chinese', 'Coffee/Tea', 'Vegetarian', 'Juice, Smoothies, Fruit Salads', 'Moroccan', 'Japanese', 'Hamburgers', 'Vegan', 'Irish', 'Czech', 'Fusion', 'Bottled Beverages', 'New French', 'Iranian', 'Chinese/Japanese', 'Californian', 'Steakhouse', 'English', 'Mediterranean', 'Afghan', 'Hawaiian', 'Indian', 'Soul Food', 'Cajun', 'Bagels/Pretzels'],
+                "SortType": ['name', 'grade', 'iDate', 'cuisine', 'borough'],
+                "Order": ['asc', 'desc']
             }
-    
     for filter in filters:
         for type in filters[filter]:
-            if argument in type:
+            if argument in type and argument!="":
                 return (filter, argument)
     return ("Name", argument)
     
 if __name__ == "__main__":
-    parse()
+    # parse()
     # db = database.Database()
-    # print(parseSearchRequest("asian restaurants in queens"))
+    print(parseSearchRequest("asian restaurants in queens"))
     # print(db.getRestaurants("name", "ASC", parseSearchRequest("asian restaurants in queens")))

@@ -12,7 +12,7 @@ def root():
     restaurants = "empty"
     returntext = ""
     if request.method == "POST":
-        restaurants=db.getRestaurants("name", "ASC", parseSearchRequest(request.form['query']))
+        restaurants=db.getRestaurants(parseSearchRequest(request.form['query']))
         returntext=request.form['query']
 
     return render_template('home.html', restList=restaurants, returntext=returntext)
