@@ -258,3 +258,10 @@ anthonyS -- 2023-05-22 3:00
 * Self-entered queries in the search bar generates correct listings/results
 * Maintain submitted text in search bar, added more natural language parsing
 ==============================================================
+
+briannaT -- 2023-05-23 04:17
+--------------------------------------------------------------
+* added pins for each of the results upon search
+* implemented zoom changes for info windows and clicking pins
+* how to zoom into a pin when clicking on a dropdown??
+==============================================================
