@@ -265,3 +265,10 @@ briannaT -- 2023-05-23 04:17
 * implemented zoom changes for info windows and clicking pins
 * how to zoom into a pin when clicking on a dropdown??
 ==============================================================
+
+briannaT -- 2023-05-24 04:00
+--------------------------------------------------------------
+* revised and uploaded final design doc
+* fixed goog api key
+* bunch.stinkycheese.rocks :)
+==============================================================
