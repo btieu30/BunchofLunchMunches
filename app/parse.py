@@ -99,7 +99,7 @@ def matchArg(argument: str) -> list:
     return ("Name", argument)
     
 if __name__ == "__main__":
-    # parse()
+    parse()
     # db = database.Database()
-    print(parseSearchRequest("asian restaurants in queens"))
+    #print(parseSearchRequest("asian restaurants in queens"))
     # print(db.getRestaurants("name", "ASC", parseSearchRequest("asian restaurants in queens")))
