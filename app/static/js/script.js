@@ -184,7 +184,6 @@ var displayResults = function() {
 var decrement = function() {
     begin=begin-5;
     hidePins();
-    deletePins();
     displayResultsWithBounds(begin, begin+4);
 
 }
@@ -192,7 +191,6 @@ var decrement = function() {
 var increment = function() {
     begin = begin+5;
     hidePins();
-    deletePins();
     displayResultsWithBounds(begin, begin+4);
 
 }
