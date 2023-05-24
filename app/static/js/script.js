@@ -416,7 +416,7 @@ var toggle = function(e) {
         this.style.display="flex";
         interior.setAttribute("class", "accordion-collapse show");
 
-        hidePinsExcept(this.parentElement.getAttribute("data-id"));
+        // hidePinsExcept(this.parentElement.getAttribute("data-id"));
     }
     else {
         for (var button of buttons) {
@@ -425,7 +425,7 @@ var toggle = function(e) {
                 button.setAttribute("aria-expanded", "false");
             }
         }
-        showPins();
+        // showPins();
         interior.setAttribute("class", "accordion-collapse collapse");
 
         // clearPin();
