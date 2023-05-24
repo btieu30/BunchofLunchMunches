@@ -41,12 +41,17 @@ source <name of env>/bin/activate
 pip install -r requirements.txt
 ```
 
-6) Run app.py
+4) Run parse.py
 ```
-python app/app.py
+python3 app/parse.py
 ```
 
-7) Go to locally hosted Flask page: ```http://127.0.0.1:5000/```
+6) Run app.py
+```
+python3 app/app.py
+```
+
+7) Go to locally hosted Flask page: ```http://127.0.0.1:5001/``` OR navigate to https://bunch.stinkycheese.rocks/
 
 ### Data
 * [New York City Restaurant Inspection Results (NYC Open Data)](https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j)
