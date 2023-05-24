@@ -29,8 +29,8 @@
       }
     }
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkEdk0O5zP5BDvlcbzusjbR6D0TRCbL8I&callback=initMap"></script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkEdk0O5zP5BDvlcbzusjbR6D0TRCbL8I&libraries=geometry,places"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{key_goog}}&callback=initMap"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key={{key_goog}}&libraries=geometry,places"></script>
     <script type="module">
       import * as bootstrap from 'bootstrap'
       new bootstrap.Popover(document.getElementById('popoverButton'))
@@ -190,7 +190,7 @@
           <!-- end of 1st col (results) -->
 
           <div class="col" id="map">
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkEdk0O5zP5BDvlcbzusjbR6D0TRCbL8I&sensor=true&callback=initialize"></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key={{key_goog}}&sensor=true&callback=initialize"></script>
           </div>
           <!-- end of 2nd col (map)-->
 
